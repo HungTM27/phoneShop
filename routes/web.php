@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Backend\Auth\loginController;
+use App\Http\Controllers\Backend\Admin\categoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('Admin.layouts.Home');
+})->name('test');
+
+Route::get('fake-user', function () {
+    $user = new App\Models\User;
+    $user->name = 'hung';
+    $user->email = 'hung.tran6@ntq-solution.com.vn';
+    $user->password = bcrypt(123456789);
+    $user->role = 1;
+    $user->save();
 });
+
+Route::get('/login',[loginController::class, 'getLogin'])->name('login');
+Route::post('/login',[loginController::class, 'postLogin'])->name('postlogin');
+Route::get('/logout',[loginController::class, 'logout'])->name('logout');
+Route::get('/store/register',[loginController::class, 'store'])->name('register');
+Route::post('/store/register',[loginController::class, 'create'])->name('createregister');
+Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
+Route::get('change-status', [categoryController::class, 'changeStatus']);
+
+Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
