@@ -1,4 +1,5 @@
 @extends('Admin.layouts.Home')
+@section('title', 'Sửa danh mục điện thoại')
 @section('content')
 <div class="container-fluid">
 	<div class="row mt-3">
@@ -8,12 +9,16 @@
 				<div class="card-body">
 					<div class="card-title">Thêm Danh Mục</div>
 					<hr>
-					<form action="" method="post">
+					<form action="" method="POST">
+						@csrf
 						<div class="form-group">
 							<label for="input-1">Tên Sản Phẩm</label>
 							<input type="text" name="name" class="form-control" id="input-1"
 								placeholder="Nhập sản phẩm ..." value="{{ old('name', $cates->name)  }}">
 						</div>
+						@error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                       @enderror	
                        <div class="card-body">
                         <div class="row">
                             <h5>Trạng Thái</h5>
@@ -29,7 +34,7 @@
                     </div>
 						<div class="d-flex justify-content-center">
 							<button type="submit" class="btn btn-sm btn-primary">Thêm</button>
-							<a href="" class="btn btn-sm btn-danger">Huỷ</a>
+							<a href="{{ route('listcates') }}" class="btn btn-sm btn-danger">Huỷ</a>
 						</div>
 					</form>
 				</div>

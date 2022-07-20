@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Repositories\User\UserRepository;
 class loginController extends Controller
 {
+    private $usersRepository;
+    public function __construct(UserRepository $usersRepository)
+    {
+        $this->usersRepository = $usersRepository;
+    }
     public function getLogin()
     {
         return view('Admin.Auth.login');
@@ -27,6 +33,7 @@ class loginController extends Controller
             'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
         ],
     );
+       
         $username = $request->input('username');
         $password = $request->input('password');
         

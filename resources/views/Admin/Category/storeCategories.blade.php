@@ -1,4 +1,5 @@
 @extends('Admin.layouts.Home')
+@section('title', 'Thêm danh mục điện thoại')
 @section('content')
 <div class="container-fluid">
 	<div class="row mt-3">

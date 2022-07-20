@@ -1,5 +1,15 @@
 @extends('Admin.layouts.Home')
+@section('title','Danh Mục')
 @section('content')
+	<div class="mesage-btn">
+		<div class="row">
+			<div class="col-md-3">
+					@if (Session::has('success'))
+						<p class="alert alert-success text-center ">{{ Session::get('success') }} </p>
+					@endif
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<form action="" method="GET">
 			<div class="input-group">
@@ -42,7 +52,7 @@
 							<td>
 								<a href="{{ route('storecreate') }}" class="btn btn-sm btn-success"><i
 										class="fa fa-plus" aria-hidden="true"></i></a>
-								<a href="{{ route('createshow', $cate->id) }}"
+								<a href="{{ route('categoriesEdit', $cate->id) }}"
 									class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
 								<a href="{{ route('destroy',$cate->id) }}"
 									class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>

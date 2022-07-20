@@ -47,7 +47,8 @@ class categoryController extends Controller
          );
         $data = $request->all();
         $this->categoriesRepository->createCategories($data);
-        return redirect(Route('listcates'));
+        return redirect(Route('listcates'))
+        ->with('success','Thêm thành công danh danh mục');
     }
 
     public function show($id)
@@ -56,12 +57,18 @@ class categoryController extends Controller
        return view('Admin.Category.editCategories',compact('cates'));
     }
 
-    public function update(Request $request , $id ,$data)
+    public function update($id ,Request $request)
     {
-        // $this->validate($request,[
-        //     []
-        // ]);
+        $this->validate($request,
+        [
+            'name'=>'required|unique:categories',
+        ],
+        [
+            'name.unique' => 'Tên sản phẩm đã tồn tại',
+        ],
+     );
 
+        $data = $request->all();
         $this->categoriesRepository->updateCategories($id,$data);
         return redirect(Route('listcates'));
     }

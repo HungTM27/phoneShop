@@ -6,13 +6,13 @@ class CategoriesRepository implements CategoriesInterface
 {
 	public function getAll(){
 		return  DB::table('categories')
-		      ->orderBy('created_at', 'desc')
-		     ->paginate(5);;
+		    ->orderBy('created_at', 'desc')
+		    ->paginate(5);;
 	}
 
 	public function createCategories(array $data)
 	{
-		Category::insert([
+		return Category::insert([
 			'name' => $data['name'],
 			'status' => $data['status'],
 		]);
@@ -25,9 +25,11 @@ class CategoriesRepository implements CategoriesInterface
 
 	public function updateCategories($id, array $data)
 	{
-		Category::find($id)
+		return DB::table('categories')
+		->where('id', $id)
      	->update([
            'name' => $data['name'],
+		   'status' => $data['status'],
         ]);
 	}
 
@@ -36,9 +38,9 @@ class CategoriesRepository implements CategoriesInterface
 	{
 		$remove = Category::destroy($id);
         if(!$remove){
-			return false;
+			return redirect()->back();
         }
-		return true;
+		return $remove;
 	}
 }
 ?>

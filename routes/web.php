@@ -45,7 +45,7 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
     Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
     Route::post('/category/store/create',[categoryController::class, 'create'])->name('create');
-    Route::get('/category/store/edit/{id}',[categoryController::class, 'show'])->name('createshow');
-    Route::post('/category/store/edit/{id}',[categoryController::class, 'update']);
+    Route::get('/category/edit/{id}',[categoryController::class, 'show'])->name('categoriesEdit');
+    Route::post('/category/edit/{id}',[categoryController::class, 'update']);
     Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
 });
