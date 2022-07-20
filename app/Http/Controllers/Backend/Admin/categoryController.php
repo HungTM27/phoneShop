@@ -6,29 +6,68 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Category;
-
+use App\Repositories\Categories\CategoriesRepository;
 class categoryController extends Controller
 {
-    public function getCates(Request $request)
+    private $categoriesRepository;
+
+	public function __construct(CategoriesRepository $categoriesRepository)
+	{
+	   $this->categoriesRepository = $categoriesRepository;
+	}
+
+    public function getCates()
     {
-        $cates = Category::orderBy('created_at', 'asc')
-        ->where('name','like', '%'.$request->search.'%')
-        ->paginate(5);
+        $cates = $this->categoriesRepository->getAll();
         return View('Admin.Category.index',compact('cates'));
     }
-
+         
     public function changeStatus(Request $request)
     {
-        $user = Category::find($request->id)->update(['status' => $request->status]);
+        $user = Category::find($request->id)
+        ->update(['status' => $request->status]);
         return response()->json(['success'=>'Status changed successfully.']);
     }
 
+    public function store()
+    {
+        return view('Admin.Category.storeCategories');
+    }
+
+    public function create(Request $request)
+    {
+        $this->validate($request,
+            [
+                'name'=>'required|unique:categories',
+            ],
+            [
+                'name.required' => 'vui lòng nhập sản phẩm ',
+                'name.unique' => 'Tên sản phẩm đã tồn tại',
+            ],
+         );
+        $data = $request->all();
+        $this->categoriesRepository->createCategories($data);
+        return redirect(Route('listcates'));
+    }
+
+    public function show($id)
+    {
+        $cates = $this->categoriesRepository->editCategories($id);
+       return view('Admin.Category.editCategories',compact('cates'));
+    }
+
+    public function update(Request $request , $id ,$data)
+    {
+        // $this->validate($request,[
+        //     []
+        // ]);
+
+        $this->categoriesRepository->updateCategories($id,$data);
+        return redirect(Route('listcates'));
+    }
+
     public function destroy($id){
-        $remove = Category::destroy($id);
-        if(!$remove){
-            return redirect()->back()
-            ->with('error','id khong ton tai');
-        }
+        $this->categoriesRepository->destroy($id);
         return redirect()->route('listcates')
         ->with('success','xoa danh muc thanh cong');
     }

@@ -29,10 +29,13 @@ class loginController extends Controller
     );
         $username = $request->input('username');
         $password = $request->input('password');
+        
         if(Auth::attempt(['email' => $username, 'password' => $password])){
             $use = User::where('email', $username)->first();
-                return redirect()->route('listcates');
+                return redirect()->route('listcates')
+                ->with('success','Đăng nhập thành công');
         }
+
         return redirect('/login')
         ->with('erorr','Tên tài khoản MK không chính xác');
     }
@@ -52,14 +55,15 @@ class loginController extends Controller
             'password.required' => 'vui lòng nhập Mật khẩu ',
             'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
         ]);
+
        $register = new User();
        $register->username = $request->input('username');
        $register->email = $request->input('email');
        $register->role = 2;
        $register->password =bcrypt($request->password);
        $register->save();
-       Session::flash('success', 'Register Successfully Register');
-       return redirect('login');
+       Session::flash('success', 'Đăng ký tài khoản thành công');
+       return redirect(route('register'));
     }
 
     public function logout() {

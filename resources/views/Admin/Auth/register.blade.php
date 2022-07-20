@@ -14,14 +14,20 @@
     <a href=""><b>Đăng</b>Ký</a>
   </div>
 
+  <div class="">
+    @if (Session::has('success'))
+      <p class="alert alert-danger">{{ Session::get('success') }} <br> 
+        <a href="{{ route('login') }}">Mời bạn đang nhập</a></p>
+    @endif
+  </div>
+
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg"></p>
-
       <form action="{{ route('register') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Full name">
+          <input type="text" name="username" class="form-control" placeholder="Full name" value="{{ old('username') }}"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -32,7 +38,7 @@
         <div class="text-danger">{{ $message }}</div>
        @enderror
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
+          <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email"  />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

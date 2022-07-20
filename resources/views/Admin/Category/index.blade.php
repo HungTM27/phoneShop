@@ -40,9 +40,9 @@
 								</div>
 							</td>
 							<td>
-								<a href="" class="btn btn-sm btn-success"><i
+								<a href="{{ route('storecreate') }}" class="btn btn-sm btn-success"><i
 										class="fa fa-plus" aria-hidden="true"></i></a>
-								<a href=""
+								<a href="{{ route('createshow', $cate->id) }}"
 									class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
 								<a href="{{ route('destroy',$cate->id) }}"
 									class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>

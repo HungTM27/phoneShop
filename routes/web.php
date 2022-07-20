@@ -32,7 +32,20 @@ Route::post('/login',[loginController::class, 'postLogin'])->name('postlogin');
 Route::get('/logout',[loginController::class, 'logout'])->name('logout');
 Route::get('/store/register',[loginController::class, 'store'])->name('register');
 Route::post('/store/register',[loginController::class, 'create'])->name('createregister');
-Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
 Route::get('change-status', [categoryController::class, 'changeStatus']);
 
-Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
+// categories route  
+// Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
+// Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
+// Route::post('/category/store/create',[categoryController::class, 'create'])->name('create');
+// Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
+// Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
+
+Route::group(['middleware' => ['admin.role']], function () {
+    Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
+    Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
+    Route::post('/category/store/create',[categoryController::class, 'create'])->name('create');
+    Route::get('/category/store/edit/{id}',[categoryController::class, 'show'])->name('createshow');
+    Route::post('/category/store/edit/{id}',[categoryController::class, 'update']);
+    Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
+});
