@@ -33,17 +33,14 @@ class loginController extends Controller
             'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
         ],
     );
-       
         $username = $request->input('username');
         $password = $request->input('password');
-        
         if(Auth::attempt(['email' => $username, 'password' => $password])){
-            $use = User::where('email', $username)->first();
-                return redirect()->route('listcates')
+            $users =  User::where('email', $username)->first();
+            return redirect()->route('listcates')
                 ->with('success','Đăng nhập thành công');
         }
-
-        return redirect('/login')
+                 return redirect('/login')
         ->with('erorr','Tên tài khoản MK không chính xác');
     }
     public function store(){

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigIncrements('id');
             $table->string('code');
             $table->string('start_time');
             $table->string('end_time');

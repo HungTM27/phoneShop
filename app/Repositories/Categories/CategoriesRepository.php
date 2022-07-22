@@ -5,9 +5,10 @@ use App\Models\Category;
 class CategoriesRepository implements CategoriesInterface
 {
 	public function getAll(){
-		return  DB::table('categories')
+			return  DB::table('categories')
 		    ->orderBy('created_at', 'desc')
-		    ->paginate(5);;
+		    ->paginate(5);
+		
 	}
 
 	public function createCategories(array $data)
@@ -16,6 +17,8 @@ class CategoriesRepository implements CategoriesInterface
 			'name' => $data['name'],
 			'status' => $data['status'],
 		]);
+
+
 	}
 
 	public function editCategories($id)

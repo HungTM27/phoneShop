@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Repositories\Categories\CategoriesRepository;
+
 class categoryController extends Controller
 {
     private $categoriesRepository;
@@ -16,10 +17,17 @@ class categoryController extends Controller
 	   $this->categoriesRepository = $categoriesRepository;
 	}
 
-    public function getCates()
+    public function getCates(Request $request)
     {
-        $cates = $this->categoriesRepository->getAll();
-        return View('Admin.Category.index',compact('cates'));
+        $keywords = $request->keyword;
+        if ($request->keyword) {
+            $cates = Category::where('name', 'like', "%$request->keyword%")
+            ->paginate(5);
+            $cates->withPath('?keyword=' . $request->keyword);
+        }else {
+            $cates = $this->categoriesRepository->getAll();
+        }
+        return View('Admin.Category.index',compact('cates','keywords'));
     }
          
     public function changeStatus(Request $request)
@@ -47,7 +55,7 @@ class categoryController extends Controller
          );
         $data = $request->all();
         $this->categoriesRepository->createCategories($data);
-        return redirect(Route('listcates'))
+        return redirect(route('listcates'))
         ->with('success','Thêm thành công danh danh mục');
     }
 
@@ -74,7 +82,11 @@ class categoryController extends Controller
     }
 
     public function destroy($id){
-        $this->categoriesRepository->destroy($id);
+        $data = $this->categoriesRepository->destroy($id);
+        if(!$data != null) {
+            return redirect()->back()
+            ->with('error', 'Xóa danh mục thất bại');
+        }
         return redirect()->route('listcates')
         ->with('success','xoa danh muc thanh cong');
     }
