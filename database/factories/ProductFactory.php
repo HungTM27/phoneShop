@@ -23,7 +23,6 @@ class ProductFactory extends Factory
             'sale_price' => rand(5,1000),
             "cate_id" => Category::all()->random()->id,
             'details' => $this->faker->name(),
-            'disabled_comment' => $this->faker->name(),
             'feature_image' => "uploads/products/" . $imgPath,
             'status'  => rand(0, 1),
         ];

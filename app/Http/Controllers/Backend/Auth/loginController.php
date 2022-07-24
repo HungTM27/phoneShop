@@ -11,10 +11,12 @@ use App\Repositories\User\UserRepository;
 class loginController extends Controller
 {
     private $usersRepository;
+
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
     }
+
     public function getLogin()
     {
         return view('Admin.Auth.login');
@@ -37,6 +39,7 @@ class loginController extends Controller
         $password = $request->input('password');
         if(Auth::attempt(['email' => $username, 'password' => $password])){
             $users =  User::where('email', $username)->first();
+            Auth::login($users);
             return redirect()->route('listcates')
                 ->with('success','Đăng nhập thành công');
         }
@@ -64,7 +67,7 @@ class loginController extends Controller
        $register->username = $request->input('username');
        $register->email = $request->input('email');
        $register->role = 2;
-       $register->password =bcrypt($request->password);
+       $register->password = bcrypt($request->password);
        $register->save();
        Session::flash('success', 'Đăng ký tài khoản thành công');
        return redirect(route('register'));

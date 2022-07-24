@@ -14,6 +14,10 @@ class Category extends Model
     public $timestamp = true;
     use HasFactory;
 
+    public function products(){
+        return $this->hasMany(Product::class, 'cate_id');
+    }
+    
     // public function getAll()
     // {
     //     return DB::table('categories')->get();

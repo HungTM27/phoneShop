@@ -11,14 +11,23 @@ class CategoriesRepository implements CategoriesInterface
 		
 	}
 
+	public function getCategories()
+	{
+		return DB::table('categories')->get();
+	}
+
 	public function createCategories(array $data)
 	{
-		return Category::insert([
+		// $create = new Category([
+		// 	'name' => $data['name'],
+		//  	'status' => $data['status'],
+		// ]);
+		// $create->save();
+		// return $create;
+		return DB::table('categories')->insert([
 			'name' => $data['name'],
 			'status' => $data['status'],
 		]);
-
-
 	}
 
 	public function editCategories($id)

@@ -28,7 +28,23 @@
 <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
-{{-- <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) --> --}}
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) --> --
 <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/codemirror/codemirror.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/codemirror/mode/css/css.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/codemirror/mode/xml/xml.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>

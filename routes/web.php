@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Auth\loginController;
 use App\Http\Controllers\Backend\Admin\categoryController;
+use App\Http\Controllers\Backend\Admin\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,13 +36,8 @@ Route::get('/store/register',[loginController::class, 'store'])->name('register'
 Route::post('/store/register',[loginController::class, 'create'])->name('createregister');
 Route::get('change-status', [categoryController::class, 'changeStatus']);
 
-// categories route  
-// Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
-// Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
-// Route::post('/category/store/create',[categoryController::class, 'create'])->name('create');
-// Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
-// Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
 
+// categories route
 Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/category/list',[categoryController::class, 'getCates'])->name('listcates'); 
     Route::get('/category/store/create',[categoryController::class, 'store'])->name('storecreate');
@@ -48,4 +45,15 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/category/edit/{id}',[categoryController::class, 'show'])->name('categoriesEdit');
     Route::post('/category/edit/{id}',[categoryController::class, 'update']);
     Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
+});
+
+// products route 
+
+Route::group(['middleware' => ['admin.role']], function () {
+    Route::get('/products/list',[ProductController::class, 'index'])->name('listProducts');
+    Route::get('/products/store/create',[ProductController::class, 'store'])->name('storeProducts');
+    Route::post('products/store/create',[ProductController::class, 'create'])->name('createStoreProducts');
+    Route::get('products/edit/{id}',[ProductController::class, 'showEditProducts'])->name('editProducts');
+    Route::post('products/edit/{id}',[ProductController::class, 'createEditProducts'])->name('createEditProducts');
+    Route::get('/products/delete/{id}',[ProductController::class, 'destroy'])->name('storeProducts.Destroy');
 });

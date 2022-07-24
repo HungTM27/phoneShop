@@ -190,5 +190,6 @@
 
 {{-- script --}}
 @include('Admin.layouts.script')
+
 </body>
 </html>

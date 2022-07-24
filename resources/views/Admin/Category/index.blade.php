@@ -37,7 +37,7 @@
 				@foreach ($cates as $cate )
 					<tbody>
 						<tr>
-							<td>{{ $loop->iteration }}</td>
+							<td>{{$loop->iteration + $cates->firstItem() - 1 }}</td>
 							<td>{{ $cate->name }}</td>
 							<td>
 								<div class="form-group">
