@@ -18,15 +18,16 @@ class ProductRepository implements ProductInterface{
 
 	public function createProduct(array $data)
 	{
-		return DB::table('products')->insert([
-			'name' => $data['name'],
-			'price' => $data['price'],
-			'sale_price' => $data['sale_price'],
-			'details' => $data['details'],
-			'status' => $data['status'],
-			'cate_id' => $data['cate_id'],
-			'feature_image' => $data['feature_image'],
-		]);
+		$products = new Product();
+		$products->name = $data['name'];
+		$products->price = $data['price'];
+		$products->sale_price = $data['sale_price'];
+		$products->details = $data['details'];
+		$products->status = $data['status'];
+		$products->cate_id = $data['cate_id'];
+		$products->feature_image = $data['feature_image'];
+		// dd($products);
+		$products->save();
 	}
 
 	public function EditProduct($id)
@@ -36,11 +37,11 @@ class ProductRepository implements ProductInterface{
 
 	public function createEditProduct($id, array $data)
 	{
-		DB::table('products')->where('id', $id)->update([
+		return	DB::table('products')->where('id', $id)->update([
 			'name' => $data['name'],
-			'price' => $data['price'],
-			'sale_price' => $data['sale_price'],
-			'details' => $data['details'],
+            'price' => $data['price'],
+            'sale_price' => $data['sale_price'],
+            'details' => $data['details'],
 			'status' => $data['status'],
 			'cate_id' => $data['cate_id'],
 			'feature_image' => $data['feature_image'],
@@ -48,4 +49,3 @@ class ProductRepository implements ProductInterface{
 	}
 
 }
-?>

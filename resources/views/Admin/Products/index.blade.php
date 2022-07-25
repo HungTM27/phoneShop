@@ -50,6 +50,8 @@
             <button class="btn btn-sm btn-primary" type="submit">Tìm kiếm</button>
         </div>    
     </div>
+    <a href="{{ route('storeProducts') }}" class="btn btn-sm btn-success"><i
+        class="fa fa-plus" aria-hidden="true"></i></a>
 </form>
 	<div class="col-md-12">
 		<div class="table-responsive">
@@ -73,7 +75,7 @@
                         <td>{{$loop->iteration + $prods->firstItem() - 1 }}</td>
                         <td>{{ $products->name }}</td>
                         <td>
-                            <img src="{{asset('storage/' . $products->feature_image)}}" width="70">
+                            <img src="{{ asset('storage/' . $products->feature_image) }}" width="70">
                         </td>
                         <td>{{ $products->price }}</td>
                         <td>{{ $products->sale_price }}</td>
@@ -81,14 +83,13 @@
                         <td>{{$products->category->name}}</td>
 						<td>
 							@if ($products->status == 1)
-								<p class="text-success">Enabled</p>
+								<p class="text-success">Còn Hàng</p>
 							@else
-								<p class="text-danger">Disabled</p>
+								<p class="text-danger">Hết Hàng</p>
 							@endif 
 						</td>
                         <td>
-                            <a href="{{ route('storeProducts') }}" class="btn btn-sm btn-success"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></a>
+                            
                             <a href="{{ route('editProducts',$products->id) }}"
                                 class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
                             <a href="{{ route('storeProducts.Destroy',$products->id) }}"
@@ -102,7 +103,7 @@
 			</table>
 		</div>
 		<div class="d-flex justify-content-left">
-           {{ $prods->links() }}
+            {{$prods->appends(request()->query())->links() }}
         </div>
 		</div>
 </div>

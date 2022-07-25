@@ -26,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Products\ProductInterface',
             'App\Repositories\Products\ProductRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Dashboard\DashboardInterface',
+            'App\Repositories\Dashboard\DashboardRepository'
+        );
     }
 
     /**

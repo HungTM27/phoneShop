@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name',191)->nullable();
             $table->integer('price');
             $table->string('sale_price');
+            $table->integer('quantity');
             $table->unsignedBigInteger('cate_id');
             $table->foreign('cate_id')->references('id')->on('categories');
             $table->string('details');
-            $table->text('disabled_comment');
             $table->string('feature_image');
             $table->integer('status')->default(0,1);
             $table->timestamps();

@@ -10,8 +10,8 @@ return [
     ],
     
     'status_products' => [
-        0 => 'Disable',
-        1 => 'Enable',
+        0 => 'Hết Hàng',
+        1 => 'Còn Hàng',
     ],
 ];
 

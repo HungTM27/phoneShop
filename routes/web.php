@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Auth\loginController;
 use App\Http\Controllers\Backend\Admin\categoryController;
+use App\Http\Controllers\Backend\Admin\DashboardController;
 use App\Http\Controllers\Backend\Admin\ProductController;
+use App\Http\Controllers\Backend\Auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +24,12 @@ Route::get('/', function () {
 
 Route::get('fake-user', function () {
     $user = new App\Models\User;
-    $user->name = 'hung';
+    $user->username = 'Hung Application';
     $user->email = 'hung.tran6@ntq-solution.com.vn';
     $user->password = bcrypt(123456789);
+    $user->avatar = 'img';
+    $user->phone = '0365855828';
+    $user->address = 'yen bai';
     $user->role = 1;
     $user->save();
 });
@@ -56,4 +61,17 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('products/edit/{id}',[ProductController::class, 'showEditProducts'])->name('editProducts');
     Route::post('products/edit/{id}',[ProductController::class, 'createEditProducts'])->name('createEditProducts');
     Route::get('/products/delete/{id}',[ProductController::class, 'destroy'])->name('storeProducts.Destroy');
+});
+
+// Dashboard route
+
+Route::group(['middleware' => ['admin.role']], function () {
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('listDashboard');
+    
+});
+
+// Users Route 
+Route::group(['middleware' => ['admin.role']], function () {
+    Route::get('/users/list',[UserController::class, 'index'])->name('listUser');
+    
 });

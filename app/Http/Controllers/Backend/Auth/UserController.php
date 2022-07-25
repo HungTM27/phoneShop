@@ -16,6 +16,17 @@ class UserController extends Controller
     }
 
     public function index(Request $request){
-            
+            $users = $this->usersRepository->getAll();
+            return view('Admin.User.index',compact('users'));
+    }
+
+    public function showUser()
+    {
+        return view('Admin.User.CreateUser');
+    }
+
+    public function createUser()
+    {
+        # code...
     }
 }

@@ -11,7 +11,7 @@ class CategoriesRepository implements CategoriesInterface
 		
 	}
 
-	public function getCategories()
+	public function getAllCategories()
 	{
 		return DB::table('categories')->get();
 	}

@@ -16,11 +16,12 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $imgPath = $this->faker->image(storage_path('app/public/uploads/products'), $width = 640, $height = 480, 'cats', false);
+        $imgPath = $this->faker->image(storage_path('app/public/uploads/products'), $width = 640, $height = 480, false);
         return [
             "name" => $this->faker->name(),
             'price' => rand(1,2000),
             'sale_price' => rand(5,1000),
+            'quantity' => rand(5,1000),
             "cate_id" => Category::all()->random()->id,
             'details' => $this->faker->name(),
             'feature_image' => "uploads/products/" . $imgPath,

@@ -28,44 +28,43 @@ class ProductController extends Controller
         } else {
             $prods = $this->productRepository->getAll();
         }
-        $cates = $this->categoriesRepository->getCategories();
+        $cates = $this->categoriesRepository->getAllCategories();
         return view('Admin.Products.index', compact('prods', 'cates'));
     }
 
     public function store()
     {
-        $cates = $this->categoriesRepository->getCategories();
+        $cates = $this->categoriesRepository->getAllCategories();
         return view('Admin.Products.CreateProduct', compact('cates'));
     }
 
     public function create(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|unique:products',
-            'price' => 'required',
-            'sale_price' => 'required',
-            'details' => 'required',
-            'feature_image' => 'required',
-            'cate_id' => 'required',
-            'status' => 'required',
-        ]);
-        // picture upload file image 
+        // $this->validate($request,[
+        //     'name' => 'required|unique:products',
+        //     'price' => 'required',
+        //     'sale_price' => 'required',
+        //     'details' => 'required',
+        //     'feature_image' => 'required',
+        //     'cate_id' => 'required',
+        //     'status' => 'required',
+        // ]);
+        //  picture upload file image 
         $data = $request->all();
-
-        if ($image = $request->file('feature_image')) {
-            $NewFileImage = time() . '.' . $image->getClientOriginalName();
-            $image->move(public_path('public/uploads/products'), $NewFileImage);
-            $data['feature_image'] = "$NewFileImage";
+        if($request->hasFile('feature_image')) {
+            $newFileName = uniqid(). '-' . $request->feature_image->getClientOriginalName();
+            $path = $request->feature_image->storeAs('public/uploads/products', $newFileName);
+            $request->feature_image = str_replace('public/', '', $path);
+            $data['feature_image'] = "$newFileName";
         }
-
-        $this->productRepository->createProduct($data);
+         $this->productRepository->createProduct($data);
         return redirect()->route('listProducts')
             ->with('success', 'Thêm sản phẩm thành công');
     }
 
     public function showEditProducts($id)
     {
-        $cates = $this->categoriesRepository->getCategories();
+        $cates = $this->categoriesRepository->getAllCategories();
         $products = $this->productRepository->EditProduct($id);
        return view('Admin.Products.EditProduct',compact('cates','products'));
     }
@@ -73,10 +72,12 @@ class ProductController extends Controller
     public function createEditProducts($id ,Request $request)
     {
         $data = $request->all();
-        if ($image = $request->file('feature_image')) {
-            $NewFileImage = time() . '.' . $image->getClientOriginalName();
-            $image->move(public_path('public/uploads/products'), $NewFileImage);
-            $data['feature_image'] = "$NewFileImage";
+        // picture upload edit products
+        if($request->hasFile('feature_image')) {
+            $newFileName = uniqid(). '-' . $request->feature_image->getClientOriginalName();
+            $path = $request->feature_image->storeAs('uploads/products', $newFileName);
+            $request->feature_image = str_replace('public/', '', $path);
+            $data['feature_image'] = "$newFileName";
         }
        $this->productRepository->createEditProduct($id,$data);
        return redirect()->route('listProducts')
@@ -87,8 +88,7 @@ class ProductController extends Controller
     {
         $data = $this->productRepository->destroyProduct($id);
         if (!$data != null) {
-            return redirect()->back()
-                ->with('error', 'Xóa sản phẩm thất bại');
+            return "404 Not Found";
         }
         return redirect()->route('listProducts')
             ->with('success', 'Xoá sản phẩm thành công');

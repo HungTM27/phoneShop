@@ -9,5 +9,11 @@ class UserRepository implements UserInterface{
 		      ->orderBy('created_at', 'desc')
 		     ->paginate(5);;
 	}
+
+	public function createUser(array $data){
+		
+	}
+
+
 }
 ?>

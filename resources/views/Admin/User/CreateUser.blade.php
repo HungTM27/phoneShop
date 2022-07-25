@@ -1,5 +1,5 @@
 @extends('Admin.layouts.Home')
-@section('title', 'Thêm sản phẩm')
+@section('title', 'Thêm Tài Khoản')
 @section('content')
     <div class="card-body">
         <form action="{{ route('storeProducts') }}" method="POST" enctype="multipart/form-data">
@@ -19,14 +19,7 @@
                         <label for="">Sale_Price</label>
                         <input type="text" name="sale_price" class="form-control" placeholder="Your Sale_Price ...">
                     </div>
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <select name="status" class="form-control">
-                            @foreach (config('common.status_products') as $k => $val)
-                                <option value="{{ $k }}">{{ $val }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="kv-avatar">
@@ -44,12 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Categories</label>
-                        <select name="cate_id" class="form-control">
-                            @foreach ($cates as $cate)
-                                <option @if ($cate->id == old('cate_id')) selected @endif value="{{ $cate->id }}">
-                                    {{ $cate->name }}</option>
-                            @endforeach
-                        </select>
+
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
