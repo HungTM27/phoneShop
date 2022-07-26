@@ -11,7 +11,18 @@ class UserRepository implements UserInterface{
 	}
 
 	public function createUser(array $data){
-		
+		return DB::table('users')->insert(
+			[
+				'username' => $data['username'],
+				'email' => $data['email'],
+				'password' => $data['password'],
+				'password_confirmation' => $data['password_confirmation'],
+				'phone' => $data['phone'],
+				'address' => $data['address'],
+				'role' => 	$data['role'],
+				'avatar' => $data['avatar'],
+			]
+			);
 	}
 
 

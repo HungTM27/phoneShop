@@ -20,13 +20,16 @@ class UserController extends Controller
             return view('Admin.User.index',compact('users'));
     }
 
-    public function showUser()
+    public function showCreateUser()
     {
         return view('Admin.User.CreateUser');
     }
 
-    public function createUser()
+    public function createUser(Request $request)
     {
-        # code...
+        $data = $request->all();
+       $user =  $this->usersRepository->createUser($data);
+       dd($user);
+
     }
 }

@@ -190,6 +190,6 @@
 
 {{-- script --}}
 @include('Admin.layouts.script')
-
+@stack('scripts')
 </body>
 </html>

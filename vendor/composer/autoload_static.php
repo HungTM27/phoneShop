@@ -507,6 +507,7 @@ class ComposerStaticInitc7eddbb651700a6111d71020bed3c2fa
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Backend\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Admin/DashboardController.php',
         'App\\Http\\Controllers\\Backend\\Admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Admin/ProductController.php',
         'App\\Http\\Controllers\\Backend\\Admin\\categoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Admin/categoryController.php',
         'App\\Http\\Controllers\\Backend\\Auth\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/Auth/UserController.php',
@@ -535,6 +536,8 @@ class ComposerStaticInitc7eddbb651700a6111d71020bed3c2fa
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Repositories\\Categories\\CategoriesInterface' => __DIR__ . '/../..' . '/app/Repositories/Categories/CategoriesInterface.php',
         'App\\Repositories\\Categories\\CategoriesRepository' => __DIR__ . '/../..' . '/app/Repositories/Categories/CategoriesRepository.php',
+        'App\\Repositories\\Dashboard\\DashboardInterface' => __DIR__ . '/../..' . '/app/Repositories/Dashboard/DashboardInterface.php',
+        'App\\Repositories\\Dashboard\\DashboardRepository' => __DIR__ . '/../..' . '/app/Repositories/Dashboard/DashboardRepository.php',
         'App\\Repositories\\Products\\ProductInterface' => __DIR__ . '/../..' . '/app/Repositories/Products/ProductInterface.php',
         'App\\Repositories\\Products\\ProductRepository' => __DIR__ . '/../..' . '/app/Repositories/Products/ProductRepository.php',
         'App\\Repositories\\User\\UserInterface' => __DIR__ . '/../..' . '/app/Repositories/User/UserInterface.php',

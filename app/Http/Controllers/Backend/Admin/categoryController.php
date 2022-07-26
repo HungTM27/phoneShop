@@ -32,9 +32,10 @@ class categoryController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $user = Category::find($request->id)
-            ->update(['status' => $request->status]);
-        return response()->json(['success' => 'Status changed successfully.']);
+        $changeStatus = Category::find($request->id);
+        $changeStatus->status = $request->status;
+        $changeStatus->save();
+        return response()->json(['success' => 'Kích hoạt thành công']);
     }
 
     public function store()
@@ -91,6 +92,6 @@ class categoryController extends Controller
                 ->with('error', 'Xóa danh mục thất bại');
         }
         return redirect()->route('listcates')
-            ->with('success', 'xoa danh muc thanh cong');
+            ->with('success', 'Xoá danh mục thành công');
     }
 }

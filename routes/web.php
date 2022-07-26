@@ -39,7 +39,7 @@ Route::post('/login',[loginController::class, 'postLogin'])->name('postlogin');
 Route::get('/logout',[loginController::class, 'logout'])->name('logout');
 Route::get('/store/register',[loginController::class, 'store'])->name('register');
 Route::post('/store/register',[loginController::class, 'create'])->name('createregister');
-Route::get('change-status', [categoryController::class, 'changeStatus']);
+
 
 
 // categories route
@@ -50,6 +50,7 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/category/edit/{id}',[categoryController::class, 'show'])->name('categoriesEdit');
     Route::post('/category/edit/{id}',[categoryController::class, 'update']);
     Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
+    Route::get('/changeStatus', [categoryController::class, 'changeStatus'])->name('changeCategoriesStatus');
 });
 
 // products route 
@@ -73,5 +74,7 @@ Route::group(['middleware' => ['admin.role']], function () {
 // Users Route 
 Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/users/list',[UserController::class, 'index'])->name('listUser');
+    Route::get('/users/store/create',[UserController::class, 'showCreateUser'])->name('ShowCreateUser');
+    Route::post('/users/store/create',[UserController::class, 'createUser']);
     
 });

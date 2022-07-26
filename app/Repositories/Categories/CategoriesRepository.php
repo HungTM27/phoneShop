@@ -18,14 +18,9 @@ class CategoriesRepository implements CategoriesInterface
 
 	public function createCategories(array $data)
 	{
-		// $create = new Category([
-		// 	'name' => $data['name'],
-		//  	'status' => $data['status'],
-		// ]);
-		// $create->save();
-		// return $create;
 		return DB::table('categories')->insert([
 			'name' => $data['name'],
+			'slug' => $data['slug'],
 			'status' => $data['status'],
 		]);
 	}
@@ -41,6 +36,7 @@ class CategoriesRepository implements CategoriesInterface
 		->where('id', $id)
      	->update([
            'name' => $data['name'],
+		   'slug' => $data['slug'],
 		   'status' => $data['status'],
         ]);
 	}
@@ -48,11 +44,7 @@ class CategoriesRepository implements CategoriesInterface
 
 	public function destroy($id)
 	{
-		$remove = Category::destroy($id);
-        if(!$remove){
-			return redirect()->back();
-        }
-		return $remove;
+		return  DB::table('categories')->where('id', $id)->delete($id);
 	}
 }
 ?>

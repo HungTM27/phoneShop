@@ -13,12 +13,17 @@
 						@csrf
 						<div class="form-group">
 							<label for="input-1">Tên Sản Phẩm</label>
-							<input type="text" name="name" class="form-control" id="input-1"
+							<input type="text" name="name" class="form-control" id="name"
 								placeholder="Nhập sản phẩm ..." value="{{ old('name', $cates->name)  }}">
 						</div>
 						@error('name')
                         <p class="text-danger">{{ $message }}</p>
                        @enderror	
+					   <div class="form-group">
+						<label for="input-1">Slug</label>
+						<input type="text" name="slug" class="form-control" id="slug"
+							placeholder="Nhập sản phẩm ..." value="{{ old('slug', $cates->slug)  }}">
+					</div>
                        <div class="card-body">
                         <div class="row">
                             <h5>Trạng Thái</h5>

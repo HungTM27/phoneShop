@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Backend\\Admin\\DashboardController' => $baseDir . '/app/Http/Controllers/Backend/Admin/DashboardController.php',
     'App\\Http\\Controllers\\Backend\\Admin\\ProductController' => $baseDir . '/app/Http/Controllers/Backend/Admin/ProductController.php',
     'App\\Http\\Controllers\\Backend\\Admin\\categoryController' => $baseDir . '/app/Http/Controllers/Backend/Admin/categoryController.php',
     'App\\Http\\Controllers\\Backend\\Auth\\UserController' => $baseDir . '/app/Http/Controllers/Backend/Auth/UserController.php',
@@ -36,6 +37,8 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Repositories\\Categories\\CategoriesInterface' => $baseDir . '/app/Repositories/Categories/CategoriesInterface.php',
     'App\\Repositories\\Categories\\CategoriesRepository' => $baseDir . '/app/Repositories/Categories/CategoriesRepository.php',
+    'App\\Repositories\\Dashboard\\DashboardInterface' => $baseDir . '/app/Repositories/Dashboard/DashboardInterface.php',
+    'App\\Repositories\\Dashboard\\DashboardRepository' => $baseDir . '/app/Repositories/Dashboard/DashboardRepository.php',
     'App\\Repositories\\Products\\ProductInterface' => $baseDir . '/app/Repositories/Products/ProductInterface.php',
     'App\\Repositories\\Products\\ProductRepository' => $baseDir . '/app/Repositories/Products/ProductRepository.php',
     'App\\Repositories\\User\\UserInterface' => $baseDir . '/app/Repositories/User/UserInterface.php',

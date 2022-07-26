@@ -18,16 +18,15 @@
                 <div class="input-group">
                     <div class="form-outline">
                     <input type="search" id="form1" name="keyword" class="form-control" value="" placeholder="Search..." />
-                    <button type="submit" class="btn btn-primary">
+                    {{-- <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
-                    </button>
+                    </button> --}}
                     </div>
                 </div>
             </div>  
         </div>
-        <a href="" class="btn btn-success" style="float: right;"><i
-            class="fa fa-plus" aria-hidden="true"></i></a>
     </form>
+       
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table" id="data-table">
@@ -56,6 +55,8 @@
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->role == 1 ? 'Admin' : 'User' }}</td>
                             <td>
+                                <a href="{{ route('ShowCreateUser') }}" class="btn btn-sm btn-success"><i
+                                    class="fa fa-plus" aria-hidden="true"></i></a>
                                 <a href="" class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
                                 <a href="" class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>
                                 </a>
