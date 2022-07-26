@@ -15,8 +15,8 @@ class UserRepository implements UserInterface{
 			[
 				'username' => $data['username'],
 				'email' => $data['email'],
-				'password' => $data['password'],
-				'password_confirmation' => $data['password_confirmation'],
+				'password' => bcrypt($data['password']),
+				'password_confirmation' => bcrypt($data['password_confirmation']),
 				'phone' => $data['phone'],
 				'address' => $data['address'],
 				'role' => 	$data['role'],
