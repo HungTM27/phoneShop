@@ -16,9 +16,6 @@
                 <div class="form-outline">
                     <input type="search" id="form1" name="keyword" class="form-control" value="{{ $keywords }}"
                         placeholder="Search..." />
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
                 </div>
             </div>
         </form>
@@ -96,8 +93,6 @@
 @endsection
 
 @push('scripts')
-
-
     <script>
         $(function() {
             $('#toggle-two').bootstrapToggle({
@@ -107,6 +102,11 @@
         });
     </script>
     <script>
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right"
+        };
         $('.toggle-class').on('change', function() {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
@@ -119,7 +119,9 @@
                     'id': id
                 },
                 success: function(data) {
-                    console.log(data.success);
+                    setTimeout(() => {
+                        toastr.success(data.success);
+                    }, 500)
                 }
             });
         });

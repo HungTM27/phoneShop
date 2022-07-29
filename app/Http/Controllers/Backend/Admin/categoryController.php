@@ -35,7 +35,8 @@ class categoryController extends Controller
         $changeStatus = Category::find($request->id);
         $changeStatus->status = $request->status;
         $changeStatus->save();
-        return response()->json(['success' => 'Kích hoạt thành công']);
+        return response()->json(['success' => 'Kích hoạt thành công'],
+        );
     }
 
     public function store()

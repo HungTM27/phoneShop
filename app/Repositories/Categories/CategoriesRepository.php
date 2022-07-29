@@ -27,7 +27,7 @@ class CategoriesRepository implements CategoriesInterface
 
 	public function editCategories($id)
 	{
-		return Category::find($id);
+		return DB::table('categories')->find($id);
 	}
 
 	public function updateCategories($id, array $data)

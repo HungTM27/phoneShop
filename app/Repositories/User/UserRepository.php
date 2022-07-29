@@ -1,17 +1,22 @@
-<?php 
-namespace App\Repositories\User;
-use Illuminate\Support\Facades\DB;
-use App\Models\User;
+<?php
 
-class UserRepository implements UserInterface{
-    public function getAll(){
+namespace App\Repositories\User;
+
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
+class UserRepository implements UserInterface
+{
+	public function getAll()
+	{
 		return  DB::table('users')
-		      ->orderBy('created_at', 'desc')
-		     ->paginate(5);;
+			->orderBy('created_at', 'desc')
+			->paginate(5);;
 	}
 
-	public function createUser(array $data){
-		return DB::table('users')->insert(
+	public function createUser(array $data)
+	{
+		return  DB::table('users')->insert(
 			[
 				'username' => $data['username'],
 				'email' => $data['email'],
@@ -19,12 +24,33 @@ class UserRepository implements UserInterface{
 				'password_confirmation' => bcrypt($data['password_confirmation']),
 				'phone' => $data['phone'],
 				'address' => $data['address'],
-				'role' => 	$data['role'],
+				'role' => $data['role'],
 				'avatar' => $data['avatar'],
 			]
-			);
+		);
 	}
 
+	public function EditUser($id)
+	{
+		return DB::table('users')->find($id);
+	}
 
+	public function createEditUser(array $data, $id)
+	{
+		return DB::table('users')->where('id', $id)->update([
+			'username' => $data['username'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+			'password_confirmation' => bcrypt($data['password_confirmation']),
+			'phone' => $data['phone'],
+			'address' => $data['address'],
+			'role' => $data['role'],
+			'avatar' => $data['avatar'],
+		]);
+	}
+
+	public function destroyUser($id)
+	{
+		return  DB::table('users')->where('id', $id)->delete($id);
+	}
 }
-?>

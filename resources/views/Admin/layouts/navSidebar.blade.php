@@ -26,7 +26,7 @@
                with font-awesome or any other icon font library -->
 
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('listProducts') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             List Products
@@ -35,7 +35,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('listcates') }}" class="nav-link active">
+                            <a href="{{ route('listUser') }}" class="nav-link active">
                                 <p> Users List</p>
                             </a>
                         </li>

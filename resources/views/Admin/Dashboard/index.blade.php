@@ -1,6 +1,19 @@
 @extends('Admin.layouts.Home')
 @section('title', 'Quan li thong tin')
 @section('content')
+    <div class="mesage-btn">
+        <div class="row">
+            <div class="col-md-3">
+                @if (Session::has('success'))
+                    <p class="alert alert-success text-center ">{{ Session::get('success') }} </p>
+                @endif
+
+                @if (Session::has('error'))
+                    <p class="alert alert-danger text-center ">{{ Session::get('success') }} </p>
+                @endif
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->

@@ -1,36 +1,29 @@
 @extends('Admin.layouts.Home')
-@section('title', 'Thêm Tài Khoản')
+@section('title', 'Sua Tài Khoản')
 @section('content')
     <div class="card-body">
-        <form action="{{ route('ShowCreateUser') }}" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Tên Tài Khoản</label>
-                        <input type="text" name="username" class="form-control" value="{{ old('username') }}">
+                        <input type="text" name="username" class="form-control" value="{{ old('username', $editUser->username) }}">
                     </div>
-                    @error('username')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+          
                     <div class="form-group">
                         <label for="">Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control" value="{{ old('email', $editUser->email) }}">
                     </div>
-                    @error('email')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                  
                     <div class="form-group">
                         <label for="">Mật Khẩu</label>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                     </div>
-                    @error('password')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
                     <div class="form-group">
                         <label for="">Nhập Lại Mật Khẩu</label>
                         <input type="password" name="password_confirmation" class="form-control"
-                            value="{{ old('password_confirmation') }}">
+                            value="">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -43,19 +36,15 @@
                     <br>
                     <div class="form-group">
                         <label for="">Số Điện Thoại</label>
-                        <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
+                        <input type="text" name="phone" class="form-control" value="{{ old('phone', $editUser->phone) }}">
                     </div>
-                    @error('phone')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+               
 
                     <div class="form-group">
                         <label for="">Địa Chỉ</label>
-                        <input type="text" name="address" class="form-control" value="{{ old('address') }}">
+                        <input type="text" name="address" class="form-control" value="{{ old('address', $editUser->address) }}">
                     </div>
-                    @error('address')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                  
                     <div class="form-group">
                         <label for="">Trạng Thái</label>
                         <select name="role" class="form-control">

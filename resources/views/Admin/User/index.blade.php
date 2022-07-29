@@ -2,7 +2,7 @@
 @section('title', 'Danh sách Tài Khoản')
 @section('content')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-4">
             @if (Session::has('success'))
                 <p class="alert alert-success text-center ">{{ Session::get('success') }} </p>
             @endif
@@ -23,7 +23,14 @@
                     </button> --}}
                     </div>
                 </div>
-            </div>  
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <a href="{{ route('ShowCreateUser') }}" id="form-add" class="btn btn-success"><i
+                        class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
+           </div>
         </div>
     </form>
        
@@ -33,32 +40,36 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Tên Tài Khoản</th>
                         <th scope="col">Avatar</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Số Điện Thoại</th>
+                        <th scope="col">Địa Chỉ</th>
+                        <th scope="col">Phân Quyền</th>
+                        <th scope="col">Chức Năng</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td>{{ $loop->iteration + $users->firstItem() - 1}}</td>
                             <td>{{ $user->username }}</td>
                             <td>
-                                <img src="" alt="">
+                                <img src="{{ asset('storage/' . $user->avatar) }}" width="70">
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->address }}</td>
-                            <td>{{ $user->role == 1 ? 'Admin' : 'User' }}</td>
                             <td>
-                                <a href="{{ route('ShowCreateUser') }}" class="btn btn-sm btn-success"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></a>
-                                <a href="" class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
-                                <a href="" class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>
+                                <input type="checkbox" class="toggle-class" data-id="{{ $user->id }}"
+                                data-toggle="toggle" data-style="ios" data-on="Admin" data-off="User"
+                                {{ $user->role == true ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                <a href="{{ route('ShowReviewUser', $user->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                
+                                <a href="{{ route('ShowEditUser', $user->id) }}" class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
+                                <a href="{{ route('destroyUser', $user->id) }}" class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -102,3 +113,37 @@
         });
     </script>
 @endsection
+@push('scripts')
+    <script>
+        $(function() {
+            $('#toggle-two').bootstrapToggle({
+                on: 'Enabled',
+                off: 'Disabled'
+            });
+        });
+    </script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right"
+        };
+        $('.toggle-class').on('change', function() {
+            var role = $(this).prop('checked') == true ? 1 : 0;
+            var id = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSON',
+                url: '{{ route('changeUserRole') }}',
+                data: {
+                    'role': role,
+                    'id': id
+                },
+                success: function(data) {
+                        toastr.success(data.success);
+                }
+            });
+        });
+    </script>
+@endpush
+

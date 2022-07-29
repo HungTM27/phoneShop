@@ -40,10 +40,11 @@ class loginController extends Controller
         );
         $username = $request->input('username');
         $password = $request->input('password');
-        if (Auth::attempt(['email' => $username, 'password' => $password])) {
+        $request->has('remember');
+        if (Auth::attempt(['email' => $username, 'password' => $password], $request->remember)) {
             $users =  User::where('email', $username)->first();
             Auth::login($users);
-            return redirect()->route('listDashboard')
+            return redirect()->route('test')
                 ->with('success', 'Đăng nhập thành công');
         }
         return redirect('/login')

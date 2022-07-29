@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Auth\UserController;
 use App\Http\Controllers\Backend\Auth\loginController;
+use App\Http\Controllers\Backend\Admin\ProductController;
 use App\Http\Controllers\Backend\Admin\categoryController;
 use App\Http\Controllers\Backend\Admin\DashboardController;
-use App\Http\Controllers\Backend\Admin\ProductController;
-use App\Http\Controllers\Backend\Auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ use App\Http\Controllers\Backend\Auth\UserController;
 */
 
 Route::get('/', function () {
-    return view('Admin.layouts.Home');
+    return view('Components.fontEnd.templates.app');
 })->name('test');
 
 Route::get('fake-user', function () {
@@ -76,5 +76,9 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/users/list',[UserController::class, 'index'])->name('listUser');
     Route::get('/users/store/create',[UserController::class, 'showCreateUser'])->name('ShowCreateUser');
     Route::post('/users/store/create',[UserController::class, 'createUser']);
-    
+    Route::get('/users/edit/{id}',[UserController::class, 'EditUser'])->name('ShowEditUser');
+    Route::post('/users/edit/{id}',[UserController::class, 'createEditUser']);
+    Route::get('/users/show/profile/{id}',[UserController::class, 'showReviewUser'])->name('ShowReviewUser');
+    Route::get('/changeRole', [UserController::class, 'changeRole'])->name('changeUserRole');
+    Route::get('/users/delete/{id}',[UserController::class, 'destroyUser'])->name('destroyUser');
 });
