@@ -56,14 +56,15 @@
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
-						<th scope="col">Name</th>
+						<th scope="col">Tên Sản Phẩm</th>
                     	<th scope="col">Image</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sale Price</th>
-                        <th scope="col">Details</th>
-                        <th scope="col">Cate_id</th>
-						<th scope="col">Status</th>
-						<th scope="col">Action</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Giá Khuyến Mãi</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Chi Tiết</th>
+                        <th scope="col">Danh Mục</th>
+						<th scope="col">Trạng Thái</th>
+						<th scope="col">Chức Năng</th>
 					</tr>
 				</thead>
              @foreach ($prods as  $products)
@@ -76,6 +77,7 @@
                         </td>
                         <td>{{ $products->price }}</td>
                         <td>{{ $products->sale_price }}</td>
+                        <td>{{ $products->quantity }}</td>
                         <td>{{ $products->details}}</td>
                         <td>{{$products->category->name}}</td>
 						<td>
