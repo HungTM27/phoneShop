@@ -27,7 +27,7 @@ class categoryController extends Controller
         } else {
             $cates = $this->categoriesRepository->getAll();
         }
-        return View('Admin.Category.index', compact('cates', 'keywords'));
+        return View('Admin.Category.index',compact('cates','keywords'));
     }
 
     public function changeStatus(Request $request)

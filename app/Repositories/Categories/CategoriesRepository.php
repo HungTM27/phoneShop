@@ -2,6 +2,7 @@
 namespace App\Repositories\Categories;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 class CategoriesRepository implements CategoriesInterface
 {
 	public function getAll(){
@@ -10,7 +11,6 @@ class CategoriesRepository implements CategoriesInterface
 		    ->paginate(5);
 		
 	}
-
 	public function getAllCategories()
 	{
 		return DB::table('categories')->get();
