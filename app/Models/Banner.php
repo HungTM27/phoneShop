@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SlideBanner extends Model
+class Banner extends Model
 {
     protected $table = 'sliders';
-    protected $fillable = [];
     public $timestamp = true;
     use HasFactory;
 }

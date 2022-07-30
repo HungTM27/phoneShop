@@ -24,7 +24,6 @@ class ProductRepository implements ProductInterface
 	public function createProduct(Request $request)
 	{
 		$products = new Product();
-		$products = new Product();
 		$products->name = $request->input('name');
 		$products->price = $request->input('price');
 		$products->sale_price = $request->input('sale_price');

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Categories\RepositoryInterface',
             'App\Repositories\Categories\CategoriesRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Banner\BannerInterface',
+            'App\Repositories\Banner\BannerRepository'
         );
         $this->app->bind(
             'App\Repositories\User\UserInterface',

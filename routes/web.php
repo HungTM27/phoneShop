@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Auth\loginController;
 use App\Http\Controllers\Backend\Admin\ProductController;
 use App\Http\Controllers\Backend\Admin\categoryController;
 use App\Http\Controllers\Backend\Admin\DashboardController;
+use App\Http\Controllers\Backend\Admin\SliderBannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,13 @@ Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/category/remove/{id}',[categoryController::class, 'destroy'])->name('destroy');
     Route::get('/changeStatus', [categoryController::class, 'changeStatus'])->name('changeCategoriesStatus');
 });
+// banner slider route 
+Route::group(['middleware' => ['admin.role']], function () {
+    Route::get('/banner/list',[SliderBannerController::class, 'index'])->name('listBanner');
+    Route::get('/banner/create/',[SliderBannerController::class, 'showCreate'])->name('showCreateBanner');
+    Route::post('/banner/create/',[SliderBannerController::class, 'createBanner'])->name('showCreateBanner');
+});
+
 
 // products route 
 
