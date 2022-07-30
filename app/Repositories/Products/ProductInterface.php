@@ -1,10 +1,12 @@
 <?php
 namespace App\Repositories\Products;
 
+use Illuminate\Http\Request;
+
 interface ProductInterface{
     public function getAll();
     public function destroyProduct($id);
-    public function createProduct(array $data);
+    public function createProduct(Request $request);
     public function EditProduct($id);
-    public function createEditProduct($id, array $data);
+    public function createEditProduct($id,Request $request);
 }

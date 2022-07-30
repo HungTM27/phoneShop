@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\User\UserRepository;
@@ -77,7 +77,7 @@ class loginController extends Controller
         $register->email = $request->input('email');
         $register->role = 2;
         $register->password = bcrypt($request->password);
-        $register->save();
+        $register->save();  
         Session::flash('success', 'Đăng ký tài khoản thành công');
         return redirect(route('register'));
     }

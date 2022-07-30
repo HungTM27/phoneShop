@@ -7,16 +7,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Name</label>
+                        <label for="">Name <span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" placeholder="Your Text Name ...">
                     </div>
                     <div class="form-group">
-                        <label for="">Price</label>
+                        <label for="">Price <span class="text-danger">*</span></label>
                         <input type="text" name="price" class="form-control" placeholder="Your Text Price ...">
                     </div>
 
                     <div class="form-group">
-                        <label for="">Sale_Price</label>
+                        <label for="">Sale_Price <span class="text-danger">*</span></label>
                         <input type="text" name="sale_price" class="form-control" placeholder="Your Sale_Price ...">
                     </div>
                     <div class="form-group">
@@ -29,21 +29,29 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="priview-mg">
+                        <img id="priview" src="" alt="" class="img-responsive">
+                    </div>
                     <div class="kv-avatar">
                         <div class="file-loading">
-                            <label for="">Uploads Image</label>
-                            <input id="avatar-1" name="feature_image" type="file">
+                            <label for="">Uploads Image <span class="text-danger">*</span></label>
+                            <input id="avatar-1" name="feature_image" type="file"  class="form-control"
+                             onchange="encodeImageFileAsURL(this)">
                         </div>
                     </div>
 
-                    <label for="">Description</label>
+                    <div class="form-group">
+                        <label for="">Số Lượng <span class="text-danger">*</span></label>
+                        <input type="text" name="quantity" class="form-control" placeholder="">
+                    </div>
+                    <label for="">Description <span class="text-danger">*</span></label>
                     <div class="card card-outline card-info">
                         <div class="card-body">
-                            <textarea id="summernote" name="details" style="display: none;"> </textarea>
+                            <textarea name="details" id="" cols="30" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Categories</label>
+                        <label for="">Categories <span class="text-danger">*</span></label>
                         <select name="cate_id" class="form-control">
                             @foreach ($cates as $cate)
                                 <option @if ($cate->id == old('cate_id')) selected @endif value="{{ $cate->id }}">
@@ -60,6 +68,18 @@
         </form>
 
     </div>
-
-
 @endsection
+
+@push('scripts')
+    <script>
+        function encodeImageFileAsURL(element) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                console.log('RESULT', reader.result)
+                $('#priview').attr('src', reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
+@endpush

@@ -4,5 +4,16 @@ input#form1 {
     margin-bottom: 20px;
     border-radius: 30px;
 }
+
+a.btn.btn-success.btn-save {
+    margin-bottom: 20px;
+    margin-right: 66px;
+}
+
+img#priview {
+    overflow: hidden;
+    height: 204px;
+    width: 400pxx;
+}
 .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
 .toggle.ios .toggle-handle { border-radius: 20px; }

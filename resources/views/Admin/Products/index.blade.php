@@ -47,8 +47,11 @@
             <button class="btn btn-sm btn-primary" type="submit">Tìm kiếm</button>
         </div>    
     </div>
-    <a href="{{ route('storeProducts') }}" class="btn btn-sm btn-success"><i
-        class="fa fa-plus" aria-hidden="true"></i></a>
+    <div class="col-12 d-flex justify-content-end">
+        <a href="{{ route('storeProducts') }}"  class="btn btn-success btn-save"><i
+            class="fa fa-plus" aria-hidden="true"> Thêm Sản Phẩm</i></a>
+    </div>  
+   
 </form>
 	<div class="col-md-12">
 		<div class="table-responsive">
@@ -73,7 +76,7 @@
                         <td>{{$loop->iteration + $prods->firstItem() - 1 }}</td>
                         <td>{{ $products->name }}</td>
                         <td>
-                            <img src="{{ asset('storage/' . $products->feature_image) }}" width="70">
+                            <img src="{{ asset($products->feature_image) }}" width="70">
                         </td>
                         <td>{{ $products->price }}</td>
                         <td>{{ $products->sale_price }}</td>

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Tên Tài Khoản</label>
+                        <label for="">Tên Tài Khoản <span class="text-danger">*</span></label>
                         <input type="text" name="username" class="form-control" value="{{ old('username') }}">
                     </div>
                     @error('username')

@@ -1,13 +1,18 @@
-<?php 
+<?php
+
 namespace App\Repositories\Products;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-class ProductRepository implements ProductInterface{
 
-    public function getAll(){
-		 return  Product::orderBy('id','asc')
-		 ->paginate(5);
+class ProductRepository implements ProductInterface
+{
+
+	public function getAll()
+	{
+		return  Product::orderBy('id', 'asc')
+			->paginate(5);
 	}
 
 	public function destroyProduct($id)
@@ -16,17 +21,22 @@ class ProductRepository implements ProductInterface{
 	}
 
 
-	public function createProduct(array $data)
+	public function createProduct(Request $request)
 	{
 		$products = new Product();
-		$products->name = $data['name'];
-		$products->price = $data['price'];
-		$products->sale_price = $data['sale_price'];
-		$products->details = $data['details'];
-		$products->status = $data['status'];
-		$products->cate_id = $data['cate_id'];
-		$products->feature_image = $data['feature_image'];
-		// dd($products);
+		$products = new Product();
+		$products->name = $request->input('name');
+		$products->price = $request->input('price');
+		$products->sale_price = $request->input('sale_price');
+		$products->details = $request->input('details');
+		$products->status = $request->input('status');
+		$products->quantity = $request->input('quantity');
+		$products->cate_id = $request->input('cate_id');
+		if ($request->hasFile('feature_image')) {
+			$newFileName = uniqid() . '-' . $request->feature_image->extension();
+			$path = $request->feature_image->storeAs('uploads/products', $newFileName);
+			$products->feature_image = $path;
+		}
 		$products->save();
 	}
 
@@ -35,17 +45,22 @@ class ProductRepository implements ProductInterface{
 		return  DB::table('products')->where('id', $id)->first();
 	}
 
-	public function createEditProduct($id, array $data)
+	public function createEditProduct($id,Request $request)
 	{
-		return	DB::table('products')->where('id', $id)->update([
-			'name' => $data['name'],
-            'price' => $data['price'],
-            'sale_price' => $data['sale_price'],
-            'details' => $data['details'],
-			'status' => $data['status'],
-			'cate_id' => $data['cate_id'],
-			'feature_image' => $data['feature_image'],
-		]);
+		$products = Product::find($id);
+		$products->name = $request->input('name');
+		$products->price = $request->input('price');
+		$products->sale_price = $request->input('sale_price');
+		$products->details = $request->input('details');
+		$products->status = $request->input('status');
+		$products->quantity = $request->input('quantity');
+		$products->cate_id = $request->input('cate_id');
+		if ($request->hasFile('feature_image')) {
+			$newFileName = uniqid() . '-' . $request->feature_image->extension();
+			$path = $request->feature_image->storeAs('uploads/products', $newFileName);
+			$products->feature_image = $path;
+		}
+		$products->save();
 	}
-
+	
 }

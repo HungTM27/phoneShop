@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="" class="img-circle elevation-2" alt="User Image">
+                {{-- <img src="" class="img-circle elevation-2" alt="User Image"> --}}
             </div>
             @if (Auth::check())
                 <div class="info">
@@ -49,7 +49,7 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('listcates') }}" class="nav-link active">
+                            <a href="{{ route('listProducts') }}" class="nav-link active">
                                 <p> Products List</p>
                             </a>
                         </li>

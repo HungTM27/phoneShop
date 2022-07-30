@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Repositories\Products\ProductRepository;
 use App\Repositories\Categories\CategoriesRepository;
 
@@ -40,24 +40,26 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        // $this->validate($request,[
-        //     'name' => 'required|unique:products',
-        //     'price' => 'required',
-        //     'sale_price' => 'required',
-        //     'details' => 'required',
-        //     'feature_image' => 'required',
-        //     'cate_id' => 'required',
-        //     'status' => 'required',
-        // ]);
-        //  picture upload file image 
-        $data = $request->all();
-        if($request->hasFile('feature_image')) {
-            $newFileName = uniqid(). '-' . $request->feature_image->getClientOriginalName();
-            $path = $request->feature_image->storeAs('public/uploads/products', $newFileName);
-            $request->feature_image = str_replace('public/', '', $path);
-            $data['feature_image'] = "$newFileName";
-        }
-         $this->productRepository->createProduct($data);
+        $this->validate($request,[
+            'name' => 'required|unique:products',
+            'price' => 'required',
+            'sale_price' => 'required',
+            'details' => 'required',
+            'feature_image' => 'required',
+            'cate_id' => 'required',
+            'status' => 'required',
+        ],
+            [
+                'name.required' => 'Mời bạn nhập tên sản phẩm',
+                'name.unique' => 'Tên sản phẩm đã tồn tại',
+                'price.required' => 'Mời bạn nhập giá sản phẩm',
+                'sale_price.required' => 'Mời bạn nhập giá khuyễn mãi sản',
+                'details.required' => 'Mời bạn nhập chi tiết sản phẩm',
+                'feature_image.required' => 'Mời bạn chọn ảnh sản phẩm',
+                'cate_id.required' => 'Mời bạn nhập giá sản phẩm',
+            ],
+        );
+        $this->productRepository->createProduct($request);
         return redirect()->route('listProducts')
             ->with('success', 'Thêm sản phẩm thành công');
     }
@@ -69,17 +71,22 @@ class ProductController extends Controller
        return view('Admin.Products.EditProduct',compact('cates','products'));
     }
 
-    public function createEditProducts($id ,Request $request)
+    public function createEditProducts(Request $request,$id)
     {
-        $data = $request->all();
-        // picture upload edit products
-        if($request->hasFile('feature_image')) {
-            $newFileName = uniqid(). '-' . $request->feature_image->getClientOriginalName();
-            $path = $request->feature_image->storeAs('uploads/products', $newFileName);
-            $request->feature_image = str_replace('public/', '', $path);
-            $data['feature_image'] = "$newFileName";
-        }
-       $this->productRepository->createEditProduct($id,$data);
+        $products = Product::find($id);
+		$products->name = $request->input('name');
+		$products->price = $request->input('price');
+		$products->sale_price = $request->input('sale_price');
+		$products->details = $request->input('details');
+		$products->status = $request->input('status');
+		$products->quantity = $request->input('quantity');
+		$products->cate_id = $request->input('cate_id');
+		if ($request->hasFile('feature_image')) {
+			$newFileName = uniqid() . '-' . $request->feature_image->extension();
+			$path = $request->feature_image->storeAs('uploads/products', $newFileName);
+			$products->feature_image = $path;
+		}
+		$products->save();
        return redirect()->route('listProducts')
             ->with('success', 'Sửa sản phẩm thành công');
     }

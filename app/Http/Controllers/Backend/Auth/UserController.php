@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
 
@@ -15,7 +14,7 @@ class UserController extends Controller
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->middleware('admin.role');
+        $this->middleware('admin.role')->except('logout');;
     }
 
     public function index(Request $request)
