@@ -45,9 +45,9 @@
                         <label for="">Số Điện Thoại</label>
                         <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
                     </div>
-                    @error('phone')
+                    {{-- @error('phone')
                         <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                    @enderror --}}
 
                     <div class="form-group">
                         <label for="">Địa Chỉ</label>

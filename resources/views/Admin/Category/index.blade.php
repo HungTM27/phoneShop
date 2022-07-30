@@ -20,6 +20,7 @@
             </div>
         </form>
     </div>
+    <div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="form-select form-select-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table" id="data-table">

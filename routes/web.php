@@ -30,7 +30,8 @@ Route::get('fake-user', function () {
     $user->avatar = 'img';
     $user->phone = '0365855828';
     $user->address = 'yen bai';
-    $user->role = 1;
+    $user->password_confirmation = $user->password_confirmation;
+    $user->role = 0;
     $user->save();
 });
 

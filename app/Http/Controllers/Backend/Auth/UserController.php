@@ -15,7 +15,7 @@ class UserController extends Controller
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->middleware('auth');
+        $this->middleware('admin.role');
     }
 
     public function index(Request $request)
@@ -49,22 +49,24 @@ class UserController extends Controller
         $this->validate(
             $request,
             [
-                'email' => 'required|unique:users',
-                'username' => 'required',
-                'phone' => 'required',
-                'address' => 'required',
-                'avatar' => 'required',
+                // 'email' => 'required|unique:users',
+                // 'username' => 'required',
+                // 'phone' => 'required',
+                // 'address' => 'required',
+                // 'avatar' => 'required',
                 'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
             ],
         );
         // image upload users 
-        $data = $request->all();
-        if ($request->hasFile('avatar')) {
-            $request->avatar->store('public/uploads');
-            $filename = $request->avatar->getClientOriginalName();
-            $request->avatar = $request->avatar->storeAs('public/uploads', $filename);
+        $createUser = $request->all();
+        $data = new User();
+        if($request->hasFile('avatar')){
+            $newFileName = uniqid(). '-' . $request->avatar->getClientOriginalName();
+            $path = $request->avatar->storeAs('public/uploads/products', $newFileName);
+            $data->image = str_replace('public/', '', $path);
         }
-        $this->usersRepository->createUser($data);
+        
+        $this->usersRepository->createUser($createUser);
         return redirect()->route('listUser')
         ->with('success', 'Thêm tài khoản thành công');
     }
@@ -78,11 +80,10 @@ class UserController extends Controller
     public function createEditUser(Request $request, $id)
     {   
         $updateUser = $request->all();
-        $data = new User();
         if($request->hasFile('avatar')){
             $newFileName = uniqid(). '-' . $request->avatar->getClientOriginalName();
             $path = $request->avatar->storeAs('public/uploads/products', $newFileName);
-            $data->image = str_replace('public/', '', $path);
+            $request->image = str_replace('public/', '', $path);
         }
         $this->usersRepository->createEditUser($updateUser,$id);
         return redirect()->route('listUser')

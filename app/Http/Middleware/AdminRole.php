@@ -16,12 +16,11 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next)
     {
+        
         if (Auth::check() && Auth::User()->role == 1) {
             return $next($request); 
         }
         return redirect()->route('test')
         ->with('error', 'Bạn không có quyền truy cập');
-        
-           
     }
 }

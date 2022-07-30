@@ -1,7 +1,7 @@
 <?php 
 namespace App\Repositories\Categories;
-use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 class CategoriesRepository implements CategoriesInterface
 {
 	public function getAll(){
@@ -35,7 +35,7 @@ class CategoriesRepository implements CategoriesInterface
 		return DB::table('categories')
 		->where('id', $id)
      	->update([
-           'name' => $data['name'],
+        'name' => $data['name'],
 		   'slug' => $data['slug'],
 		   'status' => $data['status'],
         ]);
@@ -47,4 +47,3 @@ class CategoriesRepository implements CategoriesInterface
 		return  DB::table('categories')->where('id', $id)->delete($id);
 	}
 }
-?>
