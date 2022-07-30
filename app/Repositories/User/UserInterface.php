@@ -1,10 +1,10 @@
 <?php
 namespace App\Repositories\User;
-
+use Illuminate\Http\Request;
 interface UserInterface{
     public function getAll();
-    public function createUser(array $data);
+    public function createUser(Request $request);
     public function EditUser($id);
-    public function createEditUser(array $data , $id);
+    public function createEditUser(Request $request, $id);
     public function destroyUser($id);
 }

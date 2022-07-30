@@ -27,6 +27,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="img-user">
+                        <img src="{{asset($editUser->avatar)}}" width="100">
+                    </div>
                     <div class="kv-avatar">
                         <div class="file-loading">
                             <label for="">Uploads Image</label> <br>

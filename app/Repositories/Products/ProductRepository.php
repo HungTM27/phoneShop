@@ -11,7 +11,7 @@ class ProductRepository implements ProductInterface
 
 	public function getAll()
 	{
-		return  Product::orderBy('id', 'asc')
+		return  Product::orderBy('created_at', 'desc')
 			->paginate(5);
 	}
 

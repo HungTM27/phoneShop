@@ -55,7 +55,7 @@
                             <td>{{ $loop->iteration + $users->firstItem() - 1}}</td>
                             <td>{{ $user->username }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $user->avatar) }}" width="70">
+                                <img src="{{ asset($user->avatar) }}" width="100">
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>

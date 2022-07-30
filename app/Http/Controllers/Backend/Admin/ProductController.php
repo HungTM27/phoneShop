@@ -56,7 +56,7 @@ class ProductController extends Controller
                 'sale_price.required' => 'Mời bạn nhập giá khuyễn mãi sản',
                 'details.required' => 'Mời bạn nhập chi tiết sản phẩm',
                 'feature_image.required' => 'Mời bạn chọn ảnh sản phẩm',
-                'cate_id.required' => 'Mời bạn nhập giá sản phẩm',
+                'cate_id.required' => 'Mời bạn nhập chọn danh mục sản phẩm',
             ],
         );
         $this->productRepository->createProduct($request);

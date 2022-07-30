@@ -33,7 +33,8 @@ class UserController extends Controller
         $changeRole = User::find($request->id);
         $changeRole->role = $request->role;
         $changeRole->save();
-        return response()->json(['success' => 'Kích hoạt thành công tài khoản',],
+        return response()->json(
+            ['success' => 'Kích hoạt thành công tài khoản',],
         );
     }
 
@@ -56,46 +57,44 @@ class UserController extends Controller
                 'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
             ],
         );
-        // image upload users 
-        $createUser = $request->all();
-        $data = new User();
-        if($request->hasFile('avatar')){
-            $newFileName = uniqid(). '-' . $request->avatar->getClientOriginalName();
-            $path = $request->avatar->storeAs('public/uploads/products', $newFileName);
-            $data->image = str_replace('public/', '', $path);
-        }
-        
-        $this->usersRepository->createUser($createUser);
+        $this->usersRepository->createUser($request);
         return redirect()->route('listUser')
-        ->with('success', 'Thêm tài khoản thành công');
+            ->with('success', 'Thêm tài khoản thành công');
     }
 
     public function EditUser($id)
-    {   
+    {
         $editUser = $this->usersRepository->EditUser($id);
-        return View('Admin.User.EditUser',compact('editUser'));
+        return View('Admin.User.EditUser', compact('editUser'));
     }
 
     public function createEditUser(Request $request, $id)
-    {   
-        $updateUser = $request->all();
-        if($request->hasFile('avatar')){
-            $newFileName = uniqid(). '-' . $request->avatar->getClientOriginalName();
-            $path = $request->avatar->storeAs('public/uploads/products', $newFileName);
-            $request->image = str_replace('public/', '', $path);
+    {
+        $createUser = User::find($id);
+        $createUser->username = $request->input('username');
+        $createUser->email = $request->input('email');
+        $createUser->phone = $request->input('phone');
+        $createUser->address = $request->input('address');
+        $createUser->role = $request->input('role');
+        $createUser->password = bcrypt($request->input('password'));
+        $createUser->password_confirmation = bcrypt($request->input('password_confirmation'));
+        if ($request->hasFile('avatar')) {
+            $newFileName = uniqid() . '-' . $request->avatar->extension();
+            $path = $request->avatar->storeAs('uploads/users', $newFileName);
+            $createUser->avatar = $path;
         }
-        $this->usersRepository->createEditUser($updateUser,$id);
+        $createUser->save();
         return redirect()->route('listUser')
-        ->with('success', 'Sửa tài khoản thành công');
+            ->with('success', 'Sửa tài khoản thành công');
     }
 
     public function destroyUser($id)
     {
         $deleteUser = $this->usersRepository->destroyUser($id);
-        if(empty($deleteUser)){
+        if (empty($deleteUser)) {
             return "404 Not Found";
         }
         return redirect()->route('listUser')
-        ->with('success', 'Xoá tài khoản thành công');
+            ->with('success', 'Xoá tài khoản thành công');
     }
 }
