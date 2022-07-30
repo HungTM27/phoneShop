@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="card-title">Thêm Banner</div>
                         <hr>
-                        <form action="{{ route('showCreateBanner') }}" method="post">
+                        <form action="{{ route('showCreateBanner') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="input-1">Chi tiết</label>
