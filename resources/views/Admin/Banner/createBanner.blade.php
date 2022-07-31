@@ -11,11 +11,15 @@
                         <hr>
                         <form action="{{ route('showCreateBanner') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label for="input-1">Chi tiết</label>
                                 <input type="text" name="title" class="form-control" id="name"
                                     placeholder="Nhập chi tiết ..." value="{{ old('title') }}">
                             </div>
+                            @error('title')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <div class="priview-mg">
                                 <img id="priview" src="" alt="" class="img-responsive">
                             </div>
@@ -23,10 +27,13 @@
                                 <div class="kv-avatar">
                                     <div class="file-loading">
                                         <label for="">Uploads Image <span class="text-danger">*</span></label>
-                                        <input type="file" name="slides_image"  class="form-control">
+                                        <input type="file" name="slides_image" class="form-control">
                                     </div>
                                 </div>
                             </div>
+                            @error('slides_image')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                             <div class="card-body">
                                 <div class="row">
                                     <h5>Trạng Thái</h5>

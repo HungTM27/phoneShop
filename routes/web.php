@@ -58,7 +58,11 @@ Route::group(['middleware' => ['admin.role']], function () {
 Route::group(['middleware' => ['admin.role']], function () {
     Route::get('/banner/list',[SliderBannerController::class, 'index'])->name('listBanner');
     Route::get('/banner/create/',[SliderBannerController::class, 'showCreate'])->name('showCreateBanner');
-    Route::post('/banner/create/',[SliderBannerController::class, 'createBanner'])->name('showCreateBanner');
+    Route::post('/banner/create/',[SliderBannerController::class, 'createBanner']);
+    Route::get('/banner/edit/{id}',[SliderBannerController::class, 'showEdit'])->name('showEditBanner');
+    Route::post('/banner/edit/{id}',[SliderBannerController::class, 'editCreateBanner']);
+    Route::get('/banner/delete/{id}',[SliderBannerController::class, 'destroyBanner'])->name('destroyBanner');
+    Route::get('/changeStatusBanner',[SliderBannerController::class, 'changeStatusBanner'])->name('changeStatusBanner');
 });
 
 

@@ -12,7 +12,6 @@ class BannerRepository implements BannerInterface{
 		public function createBanner(Request $request)
 		{
 			$banner = new Banner();
-		
 			$banner->title = $request->title;
 			$banner->status = $request->status;
 			if ($request->hasFile('slides_image')) {
@@ -23,9 +22,14 @@ class BannerRepository implements BannerInterface{
 			$banner->save();
 		}
 
-		// public function ()
-		// {
-		// 	# code...
-		// }
+		public function editBanner($id)
+		{
+			return DB::table('sliders')->where('id', $id)->first();
+		}
+
+		public function destroyBanner($id)
+		{
+			return  DB::table('sliders')->where('id', $id)->delete($id);
+		}
 }
 ?>	

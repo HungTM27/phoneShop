@@ -47,11 +47,11 @@
                 <tbody>
                     @foreach ($banners as  $banner)
                           <tr>
-                            {{-- <td>{{ $loop->iteration + $banners->firstItem() - 1 }}</td> --}}
+                            {{--  <td>{{ $loop->iteration + $banners->firstItem() - 1 }}</td>  --}}
                             <td>{{ $banner->id }}</td>
                             <td>{{ $banner->title }}</td>
                             <td>
-                                <img src="{{ asset($banner->slides_image) }}" width="150">
+                                <img src="{{ asset($banner->slides_image) }}" width="100">
                             </td>
                             <td>
                                 <input type="checkbox" class="toggle-class" data-id="{{ $banner->id }}"
@@ -59,8 +59,8 @@
                                 {{ $banner->status == true ? 'checked' : '' }}>
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
-                                <a href="" class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>
+                                <a href="{{route('showEditBanner', $banner->id)}}" class="btn btn-sm btn-info "><i class="fa fa-edit"></i></a>
+                                <a href="{{route('destroyBanner', $banner->id)}}" class="btn btn-sm btn-danger btn-remove"><i class="fa fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -103,7 +103,7 @@
         });
     </script>
 @endsection
-{{-- @push('scripts')
+@push('scripts')
     <script>
         $(function() {
             $('#toggle-two').bootstrapToggle({
@@ -119,14 +119,14 @@
             "positionClass": "toast-top-right"
         };
         $('.toggle-class').on('change', function() {
-            var role = $(this).prop('checked') == true ? 1 : 0;
+            var status = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
-                url: '{{ route('changeUserRole') }}',
+                url: '{{ route('changeStatusBanner') }}',
                 data: {
-                    'role': role,
+                    'status': status,
                     'id': id
                 },
                 success: function(data) {
@@ -135,5 +135,5 @@
             });
         });
     </script>
-@endpush --}}
+@endpush
 

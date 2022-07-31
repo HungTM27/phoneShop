@@ -14,7 +14,7 @@
         <form action="" method="GET">
             <div class="input-group">
                 <div class="form-outline">
-                    <input type="search" id="form1" name="keyword" class="form-control" value="{{ $keywords }}"
+                    <input type="search" id="form1" name="keyword" class="form-control" value="{{$keywords}}"
                         placeholder="Search..." />
                 </div>
             </div>
