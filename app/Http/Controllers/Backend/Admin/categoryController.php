@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
 use App\Repositories\Categories\CategoriesRepository;
 
 class categoryController extends Controller
@@ -79,7 +79,6 @@ class categoryController extends Controller
                 'name.unique' => 'Tên sản phẩm đã tồn tại',
             ],
         );
-
         $data = $request->all();
         $this->categoriesRepository->updateCategories($id, $data);
         return redirect(Route('listcates'));

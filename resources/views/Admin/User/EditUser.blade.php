@@ -8,27 +8,28 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Tên Tài Khoản</label>
-                        <input type="text" name="username" class="form-control" value="{{ old('username', $editUser->username) }}">
+                        <input type="text" name="username" class="form-control"
+                            value="{{ old('username', $editUser->username) }}">
                     </div>
-          
+
                     <div class="form-group">
                         <label for="">Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email', $editUser->email) }}">
+                        <input type="text" name="email" class="form-control"
+                            value="{{ old('email', $editUser->email) }}">
                     </div>
-                  
+
                     <div class="form-group">
                         <label for="">Mật Khẩu</label>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                     </div>
                     <div class="form-group">
                         <label for="">Nhập Lại Mật Khẩu</label>
-                        <input type="password" name="password_confirmation" class="form-control"
-                            value="">
+                        <input type="password" name="password_confirmation" class="form-control" value="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="img-user">
-                        <img src="{{asset($editUser->avatar)}}" width="100">
+                        <img src="{{ asset($editUser->avatar) }}" width="100">
                     </div>
                     <div class="kv-avatar">
                         <div class="file-loading">
@@ -39,15 +40,17 @@
                     <br>
                     <div class="form-group">
                         <label for="">Số Điện Thoại</label>
-                        <input type="text" name="phone" class="form-control" value="{{ old('phone', $editUser->phone) }}">
+                        <input type="text" name="phone" class="form-control"
+                            value="{{ old('phone', $editUser->phone) }}">
                     </div>
-               
+
 
                     <div class="form-group">
                         <label for="">Địa Chỉ</label>
-                        <input type="text" name="address" class="form-control" value="{{ old('address', $editUser->address) }}">
+                        <input type="text" name="address" class="form-control"
+                            value="{{ old('address', $editUser->address) }}">
                     </div>
-                  
+
                     <div class="form-group">
                         <label for="">Trạng Thái</label>
                         <select name="role" class="form-control">
