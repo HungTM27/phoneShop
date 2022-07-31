@@ -60,18 +60,7 @@ class SliderBannerController extends Controller
 
     public function editCreateBanner(Request $request, $id)
     {
-        $banner = Banner::find($id);
-        $banner->title = $request->title;
-        $banner->status = $request->status;
-        if ($request->hasFile('slides_image')) {
-            $newFileName = uniqid() . '-' . $request->slides_image->extension();
-            $path = $request->slides_image->storeAs('uploads/banner', $newFileName);
-            $banner->slides_image = $path;
-        }
-        $banner->save();
-        if(is_null($banner == '')){
-            return "Cập nhật không thành công";
-        }
+        $this->bannerRepository->createEditBanner($id, $request);
         return redirect()->route('listBanner')
         ->with('success','Sửa banner thành công');
     }
