@@ -71,22 +71,9 @@ class ProductController extends Controller
        return view('Admin.Products.EditProduct',compact('cates','products'));
     }
 
-    public function createEditProducts(Request $request,$id)
+    public function createEditProducts($id , Request $request)
     {
-        $products = Product::find($id);
-		$products->name = $request->input('name');
-		$products->price = $request->input('price');
-		$products->sale_price = $request->input('sale_price');
-		$products->details = $request->input('details');
-		$products->status = $request->input('status');
-		$products->quantity = $request->input('quantity');
-		$products->cate_id = $request->input('cate_id');
-		if ($request->hasFile('feature_image')) {
-			$newFileName = uniqid() . '-' . $request->feature_image->extension();
-			$path = $request->feature_image->storeAs('uploads/products', $newFileName);
-			$products->feature_image = $path;
-		}
-		$products->save();
+        $this->productRepository->createEditProduct($id, $request);
        return redirect()->route('listProducts')
             ->with('success', 'Sửa sản phẩm thành công');
     }

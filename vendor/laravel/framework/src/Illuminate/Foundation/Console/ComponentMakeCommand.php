@@ -52,7 +52,7 @@ class ComponentMakeCommand extends GeneratorCommand
     {
         if ($this->option('view')) {
             $this->writeView(function () {
-                $this->components->info($this->type.' created successfully.');
+                $this->info($this->type.' created successfully.');
             });
 
             return;
@@ -84,7 +84,7 @@ class ComponentMakeCommand extends GeneratorCommand
         }
 
         if ($this->files->exists($path) && ! $this->option('force')) {
-            $this->components->error('View already exists.');
+            $this->error('View already exists!');
 
             return;
         }

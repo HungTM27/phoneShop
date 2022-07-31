@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="card-title">Thêm Banner</div>
                         <hr>
-                        <form action="{{ route('showCreateBanner') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('showCreateBanner') }}" method="post">
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
