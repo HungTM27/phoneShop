@@ -57,7 +57,7 @@
             </div>
               <label for="">Description</label>
                 <div class="card-body">
-                    <textarea id="summernote" style="display: none;">{{ old('details', $products->details) }}</textarea>
+                    <textarea id="summernote" name="details" style="display: none;">{{ old('details', $products->details) }}</textarea>
                 </div>
           </div>
           <div class="col-12 d-flex justify-content-center">

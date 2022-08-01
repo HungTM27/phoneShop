@@ -25,19 +25,19 @@ class loginController extends Controller
 
     public function postLogin(Request $request)
     {
-        $this->validate(
-            $request,
-            [
-                'username' => 'required|email',
-                'password' => 'required|min:8'
-            ],
-            [
-                'username.required' => 'vui lòng nhập địa chỉ Email ',
-                'username.email' => 'Địa chỉ Email không đúng định dạng ',
-                'password.required' => 'vui lòng nhập Mật khẩu ',
-                'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
-            ],
-        );
+        // $this->validate(
+        //     $request,
+        //     [
+        //         'username' => 'required|email',
+        //         'password' => 'required|min:8'
+        //     ],
+        //     [
+        //         'username.required' => 'vui lòng nhập địa chỉ Email ',
+        //         'username.email' => 'Địa chỉ Email không đúng định dạng ',
+        //         'password.required' => 'vui lòng nhập Mật khẩu ',
+        //         'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
+        //     ],
+        // );
         $username = $request->input('username');
         $password = $request->input('password');
         $request->has('remember');
@@ -77,7 +77,7 @@ class loginController extends Controller
         $register->email = $request->input('email');
         $register->role = 2;
         $register->password = bcrypt($request->password);
-        $register->save();  
+        $register->save();
         Session::flash('success', 'Đăng ký tài khoản thành công');
         return redirect(route('register'));
     }

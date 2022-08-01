@@ -1,5 +1,4 @@
-@extends('Admin.layouts.Home')
-@section('title', 'Thêm Tài Khoản')
+@extends('Components.FontEnd.templates.app')
 @section('content')
     <div class="card-body">
         <form action="{{ route('ShowCreateUser') }}" method="POST" enctype="multipart/form-data">

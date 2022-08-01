@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FontEnd\FontEndController;
 use App\Http\Controllers\Backend\Auth\UserController;
 use App\Http\Controllers\Backend\Auth\loginController;
 use App\Http\Controllers\Backend\Admin\ProductController;
@@ -18,10 +19,6 @@ use App\Http\Controllers\Backend\Admin\SliderBannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('Components.fontEnd.templates.app');
-})->name('test');
 
 Route::get('fake-user', function () {
     $user = new App\Models\User;
@@ -41,10 +38,10 @@ Route::post('/login', [loginController::class, 'postLogin'])->name('postlogin');
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/store/register', [loginController::class, 'store'])->name('register');
 Route::post('/store/register', [loginController::class, 'create'])->name('createregister');
-
-
-
-// categories route
+// FontEnd ShoW Route 
+Route::get('/trang-chu', [FontEndController::class, 'index'])->name('test');
+Route::get('/danh-sach-san-pham', [FontEndController::class, 'productList'])->name('productList');
+// categories route admin 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.role']], function () {
     Route::get('/category/list', [categoryController::class, 'getCates'])->name('listcates');
     Route::get('/category/store/create', [categoryController::class, 'store'])->name('storecreate');

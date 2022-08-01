@@ -59,7 +59,7 @@
                     @enderror
                     <label for="">Description <span class="text-danger">*</span></label>
                     <div class="card-body">
-                        <textarea id="summernote" style="display: none;"></textarea>
+                        <textarea id="summernote" name="details" style="display: none;"></textarea>
                     </div>
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>
