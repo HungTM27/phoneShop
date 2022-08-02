@@ -5,6 +5,6 @@ interface UserInterface{
     public function getAll();
     public function createUser(Request $request);
     public function EditUser($id);
-    public function createEditUser(Request $request, $id);
+    public function createEditUser($id,Request $request);
     public function destroyUser($id);
 }

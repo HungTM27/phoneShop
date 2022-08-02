@@ -14,7 +14,7 @@ class UserController extends Controller
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->middleware('admin.role')->except('logout');
+        // $this->middleware('admin.role')->except('logout');
     }
 
     public function index(Request $request)
@@ -70,20 +70,10 @@ class UserController extends Controller
 
     public function createEditUser(Request $request, $id)
     {
-        $createUser = User::find($id);
-        $createUser->username = $request->input('username');
-        $createUser->email = $request->input('email');
-        $createUser->phone = $request->input('phone');
-        $createUser->address = $request->input('address');
-        $createUser->role = $request->input('role');
-        $createUser->password = bcrypt($request->input('password'));
-        $createUser->password_confirmation = bcrypt($request->input('password_confirmation'));
-        if ($request->hasFile('avatar')) {
-            $newFileName = uniqid() . '-' . $request->avatar->extension();
-            $path = $request->avatar->storeAs('uploads/users', $newFileName);
-            $createUser->avatar = $path;
+        $editUser = $this->usersRepository->createEditUser($id,$request);
+        if (!$editUser == false) {
+           return "Sửa tài khoản không thành công";
         }
-        $createUser->save();
         return redirect()->route('listUser')
             ->with('success', 'Sửa tài khoản thành công');
     }

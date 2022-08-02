@@ -1,5 +1,6 @@
 @extends('Components.FontEnd.templates.main')
 @section('content')
+
     <div class="slider-area">
         <!-- Slider -->
         <div class="block-slider block-slider4">
@@ -9,7 +10,7 @@
                         <img src="{{ asset($banner->slides_image) }}" alt="Slide">
                         <div class="caption-group">
                             <h2 class="caption title">
-                                iPhone <span class="primary">6 <strong>Plus</strong></span>
+                               <span class="primary"><strong>{{ $banner->title }}</strong></span>
                             </h2>
                             <h4 class="caption subtitle">Dual SIM</h4>
                             <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
@@ -69,15 +70,15 @@
                                             <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
                                                 Add
                                                 to cart</a>
-                                            <a href="" class="view-details-link"><i
+                                            <a href="single-product.html" class="view-details-link"><i
                                                     class="fa fa-link"></i>
                                              </a>
                                         </div>
                                     </div>
-                                    <h2><a href="">  {{ $product->name }}</a></h2>
+                                    <h2><a href="single-product.html">  {{ $product->name }}</a></h2>
 
                                     <div class="product-carousel-price">
-                                        <ins>${{ number_format($product->price) }}</ins> <del>${{ number_format($product->sale_price) }}</del>
+                                        <ins>${{ number_format($product->price) }}</ins> <del>${{ number_format($product->price) }}</del>
                                     </div>
                                 </div>
                                 @endforeach
@@ -121,9 +122,9 @@
                         <h2 class="product-wid-title">Top Sellers</h2>
                         <a href="" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-1.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
+                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -136,9 +137,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-2.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-2.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Apple new mac book 2015</a></h2>
+                            <h2><a href="single-product.html">Apple new mac book 2015</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -151,9 +152,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-3.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-3.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Apple new i phone 6</a></h2>
+                            <h2><a href="single-product.html">Apple new i phone 6</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -172,9 +173,9 @@
                         <h2 class="product-wid-title">Recently Viewed</h2>
                         <a href="#" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-4.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-4.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Sony playstation microsoft</a></h2>
+                            <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -187,9 +188,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-1.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Sony Smart Air Condtion</a></h2>
+                            <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -202,9 +203,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-2.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-2.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Samsung gallaxy note 4</a></h2>
+                            <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -223,9 +224,9 @@
                         <h2 class="product-wid-title">Top New</h2>
                         <a href="#" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-3.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-3.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Apple new i phone 6</a></h2>
+                            <h2><a href="single-product.html">Apple new i phone 6</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -238,9 +239,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-4.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-4.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Samsung gallaxy note 4</a></h2>
+                            <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -253,9 +254,9 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href=""><img src="img/product-thumb-1.jpg" alt=""
+                            <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt=""
                                     class="product-thumb"></a>
-                            <h2><a href="">Sony playstation microsoft</a></h2>
+                            <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>

@@ -1,4 +1,5 @@
-@extends('Components.FontEnd.templates.app')
+@extends('Admin.layouts.Home')
+@section('title', 'Thêm tài khoản User')
 @section('content')
     <div class="card-body">
         <form action="{{ route('ShowCreateUser') }}" method="POST" enctype="multipart/form-data">
@@ -13,21 +14,21 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                     <div class="form-group">
-                        <label for="">Email</label>
+                        <label for="">Email <span class="text-danger">*</span></label>
                         <input type="text" name="email" class="form-control" value="{{ old('email') }}">
                     </div>
                     @error('email')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                     <div class="form-group">
-                        <label for="">Mật Khẩu</label>
+                        <label for="">Mật Khẩu <span class="text-danger">*</span></label>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                     </div>
                     @error('password')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                     <div class="form-group">
-                        <label for="">Nhập Lại Mật Khẩu</label>
+                        <label for="">Nhập Lại Mật Khẩu <span class="text-danger">*</span></label>
                         <input type="password" name="password_confirmation" class="form-control"
                             value="{{ old('password_confirmation') }}">
                     </div>
@@ -49,7 +50,7 @@
                     @enderror --}}
 
                     <div class="form-group">
-                        <label for="">Địa Chỉ</label>
+                        <label for="">Địa Chỉ <span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control" value="{{ old('address') }}">
                     </div>
                     @error('address')

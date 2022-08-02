@@ -86,14 +86,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="{{ route('productList') }}">Shop page</a></li>
-                        {{-- @foreach ($categories as  $category)
-                        <li><a href="">{{ $category->name }}</a></li>
-                        @endforeach --}}
                     </ul>
                 </div>  
             </div>
-        </div>
+          </div>
     </div> <!-- End mainmenu area -->
         @yield('content')
     <div class="footer-top-area">

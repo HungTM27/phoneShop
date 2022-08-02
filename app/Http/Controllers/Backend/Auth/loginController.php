@@ -25,19 +25,19 @@ class loginController extends Controller
 
     public function postLogin(Request $request)
     {
-        // $this->validate(
-        //     $request,
-        //     [
-        //         'username' => 'required|email',
-        //         'password' => 'required|min:8'
-        //     ],
-        //     [
-        //         'username.required' => 'vui lòng nhập địa chỉ Email ',
-        //         'username.email' => 'Địa chỉ Email không đúng định dạng ',
-        //         'password.required' => 'vui lòng nhập Mật khẩu ',
-        //         'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
-        //     ],
-        // );
+        $this->validate(
+            $request,
+            [
+                'username' => 'required|email',
+                'password' => 'required|min:8'
+            ],
+            [
+                'username.required' => 'vui lòng nhập địa chỉ Email ',
+                'username.email' => 'Địa chỉ Email không đúng định dạng ',
+                'password.required' => 'vui lòng nhập Mật khẩu ',
+                'password.min' => 'Mật khẩu ít nhất là 8 ký tự',
+            ],
+        );
         $username = $request->input('username');
         $password = $request->input('password');
         $request->has('remember');
@@ -46,9 +46,10 @@ class loginController extends Controller
             Auth::login($users);
             return redirect()->route('test')
                 ->with('success', 'Đăng nhập thành công');
-        }
-        return redirect('/login')
+        }else{
+               return redirect('/login')
             ->with('erorr', 'Tên tài khoản MK không chính xác');
+        }
     }
     public function store()
     {
