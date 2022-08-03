@@ -131,18 +131,20 @@
         $('.toggle-class').on('change', function() {
             var role = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
-            $.ajax({
-                type: 'GET',
-                dataType: 'JSON',
-                url: '{{ route('changeUserRole') }}',
-                data: {
-                    'role': role,
-                    'id': id
-                },
-                success: function(data) {
-                        toastr.success(data.success);
-                }
-            });
+            
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'JSON',
+                    url: '{{ route('changeUserRole') }}',
+                    data: {
+                        'role': role,
+                        'id': id
+                    },
+                    success: function(data) {
+                        if (!confirm('Are you sure?')) data.preventDefault();
+                            toastr.success(data.success);
+                    }
+                });
         });
     </script>
 @endpush

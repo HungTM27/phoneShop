@@ -68,22 +68,9 @@ class UserController extends Controller
         return View('Admin.User.EditUser', compact('editUser'));
     }
 
-    public function createEditUser(Request $request, $id)
+    public function createEditUser($id,Request $request)
     {
-        $createUser = User::find($id);
-        $createUser->username = $request->input('username');
-        $createUser->email = $request->input('email');
-        $createUser->phone = $request->input('phone');
-        $createUser->address = $request->input('address');
-        $createUser->role = $request->input('role');
-        $createUser->password = bcrypt($request->input('password'));
-        $createUser->password_confirmation = bcrypt($request->input('password_confirmation'));
-        if ($request->hasFile('avatar')) {
-            $newFileName = uniqid() . '-' . $request->avatar->extension();
-            $path = $request->avatar->storeAs('uploads/users', $newFileName);
-            $createUser->avatar = $path;
-        }
-        $createUser->save();
+        $this->usersRepository->createUser($id,$request);
         return redirect()->route('listUser')
             ->with('success', 'Sửa tài khoản thành công');
     }
