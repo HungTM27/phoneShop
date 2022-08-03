@@ -44,7 +44,7 @@ class loginController extends Controller
         if (Auth::attempt(['email' => $username, 'password' => $password], $request->remember)) {
             $users =  User::where('email', $username)->first();
             Auth::login($users);
-            return redirect()->route('test')
+            return redirect()->route('homePage')
                 ->with('success', 'Đăng nhập thành công');
         }else{
                return redirect('/login')

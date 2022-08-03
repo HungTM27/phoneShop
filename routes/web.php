@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FontEnd\FontEndController;
+use App\Http\Controllers\FontEnd\CartPageController;
 use App\Http\Controllers\Backend\Auth\UserController;
 use App\Http\Controllers\Backend\Auth\loginController;
+use App\Http\Controllers\FontEnd\CartProductController;
+use App\Http\Controllers\FontEnd\ProductPageController;
 use App\Http\Controllers\Backend\Admin\ProductController;
 use App\Http\Controllers\Backend\Admin\categoryController;
 use App\Http\Controllers\Backend\Admin\DashboardController;
@@ -39,12 +42,11 @@ Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/store/register', [loginController::class, 'store'])->name('register');
 Route::post('/store/register', [loginController::class, 'create'])->name('createregister');
 // FontEnd ShoW Route 
-Route::get('/trang-chu', [FontEndController::class, 'index'])->name('test');
-Route::get('/danh-muc/{slug}.html', [FontEndController::class, 'categoriesList'])->name('categoriesList');
-Route::get('/danh-sach-san-pham', [FontEndController::class, 'productList'])->name('productList');
-
-
-
+Route::get('/trang-chu', [FontEndController::class, 'homePage'])->name('homePage');
+Route::get('/danh-muc', [FontEndController::class, 'categoriesPage'])->name('categoriesPage');
+Route::get('/san-pham', [ProductPageController::class, 'productsPage'])->name('productsPage');
+Route::get('/gio-hang', [CartProductController::class, 'CartProductPage'])->name('CartProductPage');
+Route::get('/thanh-toan', [CartPageController::class, 'checkoutCartPage'])->name('checkoutCartPage');
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.role']], function () {
     // Dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('listDashboard');
