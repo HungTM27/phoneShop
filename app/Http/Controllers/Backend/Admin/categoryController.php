@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use App\Repositories\Categories\CategoriesRepository;
+use App\Repositories\Admin\Categories\CategoriesRepository;
 
 class categoryController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php 
-namespace App\Repositories\Categories;
+namespace App\Repositories\Admin\Categories;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class CategoriesRepository implements CategoriesInterface
 {
 	public function getAll(){

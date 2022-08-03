@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\User;
+namespace App\Repositories\Admin\User;
 use Illuminate\Http\Request;
 interface UserInterface{
     public function getAll();

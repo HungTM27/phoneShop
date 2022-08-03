@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\Categories;
+namespace App\Repositories\Admin\Categories;
 use Illuminate\Http\Request;
 interface CategoriesInterface{
     public function getAll();

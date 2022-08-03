@@ -6,8 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormValidate;
-use App\Repositories\Products\ProductRepository;
-use App\Repositories\Categories\CategoriesRepository;
+use App\Repositories\Admin\Products\ProductRepository;
+use App\Repositories\Admin\Categories\CategoriesRepository;
 class ProductController extends Controller
 {
     private $productRepository;

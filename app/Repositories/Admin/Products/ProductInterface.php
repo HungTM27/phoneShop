@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\Products;
+namespace App\Repositories\Admin\Products;
 
 use Illuminate\Http\Request;
 

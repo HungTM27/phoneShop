@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\Banner;
+namespace App\Repositories\Admin\Banner;
 
 use Illuminate\Http\Request;
 

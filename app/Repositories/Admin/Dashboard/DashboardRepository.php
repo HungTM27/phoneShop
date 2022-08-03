@@ -1,5 +1,5 @@
 <?php 
-namespace App\Repositories\Dashboard;
+namespace App\Repositories\Admin\Dashboard;
 use Illuminate\Support\Facades\DB;
 
 class DashboardRepository implements DashboardInterface{

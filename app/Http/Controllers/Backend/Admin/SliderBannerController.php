@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Banner\BannerRepository;
+use App\Repositories\Admin\Banner\BannerRepository;
 
 class SliderBannerController extends Controller
 {

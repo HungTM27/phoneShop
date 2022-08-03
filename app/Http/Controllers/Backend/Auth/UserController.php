@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\User\UserRepository;
+use App\Repositories\Admin\User\UserRepository;
 
 class UserController extends Controller
 {
