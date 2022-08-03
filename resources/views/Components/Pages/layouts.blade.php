@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('fontEnd/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('fontEnd/css/responsive.css') }}">
 </head>
+
 <body>
     <div class="header-area">
         <div class="container">
@@ -31,11 +32,20 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                            @if (Auth::check() && Auth::user()->role == 1)
+                            <li><a href="{{ route('listDashboard') }}"><i class="fa fa-user"></i>Quản trị Admin</a></li>
+                            @endif
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                            @if(Auth::check() && Auth::User()->id)
+                            <li>
+                                <a href="{{ URL::to('/logout') }}"><i class="fa fa-lock"></i> Đăng xuất</a>
+                            </li>
+                                @else
+                                <li>
+                                    <a href="{{ URL::to('/login') }}"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -114,7 +124,7 @@
         </div>
     </div>
     <!-- End mainmenu area -->
-        @yield('content')
+    @yield('content')
     <!-- End product widget area -->
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
@@ -214,4 +224,5 @@
     <script type="text/javascript" src="{{ asset('fontEnd/js/bxslider.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('fontEnd/js/script.slider.js') }}"></script>
 </body>
+
 </html>

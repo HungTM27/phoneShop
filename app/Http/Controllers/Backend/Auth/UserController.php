@@ -14,7 +14,7 @@ class UserController extends Controller
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        // $this->middleware('admin.role')->except('logout');
+        $this->middleware('auth')->except('logout');
     }
 
     public function index(Request $request)

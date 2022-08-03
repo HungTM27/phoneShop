@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FontEnd\FontEndController;
 use App\Http\Controllers\FontEnd\CartPageController;
@@ -47,10 +48,11 @@ Route::get('/danh-muc', [FontEndController::class, 'categoriesPage'])->name('cat
 Route::get('/san-pham', [ProductPageController::class, 'productsPage'])->name('productsPage');
 Route::get('/gio-hang', [CartProductController::class, 'CartProductPage'])->name('CartProductPage');
 Route::get('/thanh-toan', [CartPageController::class, 'checkoutCartPage'])->name('checkoutCartPage');
+
+// Route Group Admin Controllers
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.role']], function () {
     // Dashboard route
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('listDashboard');
-    
     // Users Route 
     Route::get('/users/list', [UserController::class, 'index'])->name('listUser');
     Route::get('/users/store/create', [UserController::class, 'showCreateUser'])->name('ShowCreateUser');

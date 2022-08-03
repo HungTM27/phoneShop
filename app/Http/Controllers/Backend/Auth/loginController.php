@@ -85,7 +85,8 @@ class loginController extends Controller
 
     public function logout()
     {
+        $id = Auth::user()->id;
         Auth::logout();
-        return redirect()->route('test');
+        return redirect()->route('homePage');
     }
 }
