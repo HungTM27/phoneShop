@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\FontEnd;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
 class ProductPageController extends Controller
 {
     public function productsPage()
     {
-        return view('Components.Pages.ProductShop');
+        $productAll = DB::table('products')->orderBy('created_at', 'desc')->paginate(12);
+        return view('Components.Pages.ProductShop',compact('productAll'));
     }
 }

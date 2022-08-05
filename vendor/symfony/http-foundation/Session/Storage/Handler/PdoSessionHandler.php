@@ -286,7 +286,11 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         $maxlifetime = (int) \ini_get('session.gc_maxlifetime');
+=======
+        $maxlifetime = (int) (($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime'));
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         try {
             // We use a single MERGE SQL query when supported by the database.
@@ -329,7 +333,11 @@ class PdoSessionHandler extends AbstractSessionHandler
 
     public function updateTimestamp(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         $expiry = time() + (int) \ini_get('session.gc_maxlifetime');
+=======
+        $expiry = time() + (int) (($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime'));
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         try {
             $updateStmt = $this->pdo->prepare(

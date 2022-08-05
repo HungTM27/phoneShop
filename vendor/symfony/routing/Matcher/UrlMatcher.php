@@ -220,7 +220,11 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
      *
      * @return array The first element represents the status, the second contains additional information
      */
+<<<<<<< HEAD
     protected function handleRouteRequirements(string $pathinfo, string $name, Route $route): array
+=======
+    protected function handleRouteRequirements(string $pathinfo, string $name, Route $route/* , array $routeParameters */): array
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
     {
         // expression condition
         if ($route->getCondition() && !$this->getExpressionLanguage()->evaluate($route->getCondition(), ['context' => $this->context, 'request' => $this->request ?: $this->createRequest($pathinfo)])) {

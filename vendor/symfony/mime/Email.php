@@ -443,7 +443,11 @@ class Email extends Message
             return $this->cachedBody;
         }
 
+<<<<<<< HEAD
         $this->ensureValidity();
+=======
+        $this->ensureBodyValid();
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         [$htmlPart, $attachmentParts, $inlineParts] = $this->prepareParts();
 

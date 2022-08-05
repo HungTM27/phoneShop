@@ -184,6 +184,7 @@ class QpEncoder implements EncoderInterface
     private function standardize(string $string): string
     {
         $string = str_replace(["\t=0D=0A", ' =0D=0A', '=0D=0A'], ["=09\r\n", "=20\r\n", "\r\n"], $string);
+<<<<<<< HEAD
         switch ($end = \ord(substr($string, -1))) {
             case 0x09:
             case 0x20:
@@ -191,5 +192,13 @@ class QpEncoder implements EncoderInterface
         }
 
         return $string;
+=======
+
+        return match ($end = \ord(substr($string, -1))) {
+            0x09,
+            0x20 => substr_replace($string, self::QP_MAP[$end], -1),
+            default => $string,
+        };
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
     }
 }

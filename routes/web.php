@@ -1,6 +1,5 @@
 <?php
 
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FontEnd\FontEndController;
 use App\Http\Controllers\FontEnd\CartPageController;
@@ -12,6 +11,8 @@ use App\Http\Controllers\Backend\Admin\ProductController;
 use App\Http\Controllers\Backend\Admin\categoryController;
 use App\Http\Controllers\Backend\Admin\DashboardController;
 use App\Http\Controllers\Backend\Admin\SliderBannerController;
+use App\Http\Controllers\BackEnd\Auth\ResetPasswordController;
+use App\Http\Controllers\BackEnd\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,15 +40,24 @@ Route::get('fake-user', function () {
 
 Route::get('/login', [loginController::class, 'getLogin'])->name('login');
 Route::post('/login', [loginController::class, 'postLogin'])->name('postlogin');
+
+Route::get('/forget-password', [ForgotPasswordController::class , 'getEmail'])->name('resetPassword');
+Route::post('/forget-password', [ForgotPasswordController::class , 'postEmail']); 
+Route::get('/reset-password/{token}',[ResetPasswordController::class , 'getPassword'])->name('reset.password');
+Route::post('/reset-password', [ResetPasswordController::class , 'updatePassword']);
+
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/store/register', [loginController::class, 'store'])->name('register');
 Route::post('/store/register', [loginController::class, 'create'])->name('createregister');
 // FontEnd ShoW Route 
-Route::get('/trang-chu', [FontEndController::class, 'homePage'])->name('homePage');
-Route::get('/danh-muc', [FontEndController::class, 'categoriesPage'])->name('categoriesPage');
+Route::get('/', [FontEndController::class, 'homePage'])->name('homePage');
+Route::get('/danh-muc/{$slug}', [FontEndController::class, 'categoriesListMenu'])->name('categoriesPage');
 Route::get('/san-pham', [ProductPageController::class, 'productsPage'])->name('productsPage');
 Route::get('/gio-hang', [CartProductController::class, 'CartProductPage'])->name('CartProductPage');
 Route::get('/thanh-toan', [CartPageController::class, 'checkoutCartPage'])->name('checkoutCartPage');
+
+
+
 
 // Route Group Admin Controllers
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.role']], function () {

@@ -105,7 +105,12 @@ class MongoDbSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         $expiry = new UTCDateTime((time() + (int) \ini_get('session.gc_maxlifetime')) * 1000);
+=======
+        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime');
+        $expiry = new UTCDateTime((time() + (int) $ttl) * 1000);
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         $fields = [
             $this->options['time_field'] => new UTCDateTime(),
@@ -124,7 +129,12 @@ class MongoDbSessionHandler extends AbstractSessionHandler
 
     public function updateTimestamp(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         $expiry = new UTCDateTime((time() + (int) \ini_get('session.gc_maxlifetime')) * 1000);
+=======
+        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime');
+        $expiry = new UTCDateTime((time() + (int) $ttl) * 1000);
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         $this->getCollection()->updateOne(
             [$this->options['id_field'] => $sessionId],

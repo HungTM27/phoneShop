@@ -69,7 +69,12 @@ class MemcachedSessionHandler extends AbstractSessionHandler
 
     public function updateTimestamp(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         $this->memcached->touch($this->prefix.$sessionId, time() + (int) ($this->ttl ?? \ini_get('session.gc_maxlifetime')));
+=======
+        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime');
+        $this->memcached->touch($this->prefix.$sessionId, time() + (int) $ttl);
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
 
         return true;
     }
@@ -79,7 +84,13 @@ class MemcachedSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite(string $sessionId, string $data): bool
     {
+<<<<<<< HEAD
         return $this->memcached->set($this->prefix.$sessionId, $data, time() + (int) ($this->ttl ?? \ini_get('session.gc_maxlifetime')));
+=======
+        $ttl = ($this->ttl instanceof \Closure ? ($this->ttl)() : $this->ttl) ?? \ini_get('session.gc_maxlifetime');
+
+        return $this->memcached->set($this->prefix.$sessionId, $data, time() + (int) $ttl);
+>>>>>>> b68285831ad08c6dee0f049336f3da5a5a075313
     }
 
     /**
