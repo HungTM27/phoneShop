@@ -141,8 +141,12 @@
                         'id': id
                     },
                     success: function(data) {
-                        if (!confirm('Are you sure?')) data.preventDefault();
+                        setTimeout(function()) {
                             toastr.success(data.success);
+                        }
+                    }
+                    error: function(){
+                        toastr.error(data.error);
                     }
                 });
         });

@@ -15,24 +15,24 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Repositories\Categories\RepositoryInterface',
-            'App\Repositories\Categories\CategoriesRepository'
+            'App\Repositories\Admin\Categories\RepositoryInterface',
+            'App\Repositories\Admin\Categories\CategoriesRepository'
         );
         $this->app->bind(
-            'App\Repositories\Banner\BannerInterface',
-            'App\Repositories\Banner\BannerRepository'
+            'App\Repositories\Admin\Banner\BannerInterface',
+            'App\Repositories\Admin\Banner\BannerRepository'
         );
         $this->app->bind(
-            'App\Repositories\User\UserInterface',
-            'App\Repositories\User\UserRepository'
+            'App\Repositories\Admin\User\UserInterface',
+            'App\Repositories\Admin\User\UserRepository'
         );
         $this->app->bind(
-            'App\Repositories\Products\ProductInterface',
-            'App\Repositories\Products\ProductRepository'
+            'App\Repositories\Admin\Products\ProductInterface',
+            'App\Repositories\Admin\Products\ProductRepository'
         );
         $this->app->bind(
-            'App\Repositories\Dashboard\DashboardInterface',
-            'App\Repositories\Dashboard\DashboardRepository'
+            'App\Repositories\Admin\Dashboard\DashboardInterface',
+            'App\Repositories\Admin\Dashboard\DashboardRepository'
         );
     }
 

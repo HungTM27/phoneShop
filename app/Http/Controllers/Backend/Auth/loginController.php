@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Repositories\User\UserRepository;
+use App\Repositories\Admin\User\UserRepository;
 
 class loginController extends Controller
 {
@@ -44,11 +44,12 @@ class loginController extends Controller
         if (Auth::attempt(['email' => $username, 'password' => $password], $request->remember)) {
             $users =  User::where('email', $username)->first();
             Auth::login($users);
-            return redirect()->route('test')
+            return redirect()->route('homePage')
                 ->with('success', 'Đăng nhập thành công');
-        }
-        return redirect('/login')
+        }else{
+               return redirect('/login')
             ->with('erorr', 'Tên tài khoản MK không chính xác');
+        }
     }
     public function store()
     {
@@ -77,14 +78,15 @@ class loginController extends Controller
         $register->email = $request->input('email');
         $register->role = 2;
         $register->password = bcrypt($request->password);
-        $register->save();  
+        $register->save();
         Session::flash('success', 'Đăng ký tài khoản thành công');
         return redirect(route('register'));
     }
 
     public function logout()
     {
+        $id = Auth::user()->id;
         Auth::logout();
-        return redirect()->route('test');
+        return redirect()->route('homePage');
     }
 }

@@ -56,12 +56,9 @@
                 <input type="text" name="quantity" class="form-control" placeholder="" value="{{ old('quantity', $products->quantity) }}">
             </div>
               <label for="">Description</label>
-              <div class="card card-outline card-info">
                 <div class="card-body">
-                 <textarea name="details" id="" cols="30" rows="3">{{ old('details', $products->details) }}</textarea>
+                    <textarea id="summernote" name="details" style="display: none;">{{ old('details', $products->details) }}</textarea>
                 </div>
-              </div>
-            
           </div>
           <div class="col-12 d-flex justify-content-center">
             <button class="btn btn-sm btn-primary" type="submit">Save</button>

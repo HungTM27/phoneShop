@@ -19,8 +19,8 @@ class AdminRole
         
         if (Auth::check() && Auth::User()->role == 1) {
             return $next($request); 
+        }else{
+            return redirect(route('homePage'));
         }
-        return redirect()->route('test')
-        ->with('error', 'Bạn không có quyền truy cập');
     }
 }

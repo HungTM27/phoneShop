@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\User\UserRepository;
+use App\Repositories\Admin\User\UserRepository;
 
 class UserController extends Controller
 {
@@ -14,7 +14,7 @@ class UserController extends Controller
     public function __construct(UserRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->middleware('admin.role')->except('logout');;
+        $this->middleware('auth')->except('logout');
     }
 
     public function index(Request $request)
@@ -34,7 +34,9 @@ class UserController extends Controller
         $changeRole->role = $request->role;
         $changeRole->save();
         return response()->json(
-            ['success' => 'Kích hoạt thành công tài khoản',],
+            ['success' => 'Kích hoạt thành công tài khoản',
+                'error' => 'Kích hoạt không công tài khoản',
+            ],
         );
     }
 
@@ -49,11 +51,11 @@ class UserController extends Controller
         $this->validate(
             $request,
             [
-                // 'email' => 'required|unique:users',
-                // 'username' => 'required',
-                // 'phone' => 'required',
-                // 'address' => 'required',
-                // 'avatar' => 'required',
+                'email' => 'required|unique:users,email',
+                'username' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'avatar' => 'required',
                 'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
             ],
         );
@@ -71,6 +73,10 @@ class UserController extends Controller
     public function createEditUser($id,Request $request)
     {
         $this->usersRepository->createUser($id,$request);
+        $editUser = $this->usersRepository->createEditUser($id,$request);
+        if (!$editUser == false) {
+           return "Sửa tài khoản không thành công";
+        }
         return redirect()->route('listUser')
             ->with('success', 'Sửa tài khoản thành công');
     }

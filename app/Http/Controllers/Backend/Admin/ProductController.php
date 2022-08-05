@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Products\ProductRepository;
-use App\Repositories\Categories\CategoriesRepository;
-
+use App\Http\Requests\ProductFormValidate;
+use App\Repositories\Admin\Products\ProductRepository;
+use App\Repositories\Admin\Categories\CategoriesRepository;
 class ProductController extends Controller
 {
     private $productRepository;
@@ -38,27 +38,8 @@ class ProductController extends Controller
         return view('Admin.Products.CreateProduct', compact('cates'));
     }
 
-    public function create(Request $request)
+    public function create(ProductFormValidate $request)
     {
-        $this->validate($request,[
-            'name' => 'required|unique:products',
-            'price' => 'required',
-            'sale_price' => 'required',
-            'details' => 'required',
-            'feature_image' => 'required',
-            'cate_id' => 'required',
-            'status' => 'required',
-        ],
-            [
-                'name.required' => 'Mời bạn nhập tên sản phẩm',
-                'name.unique' => 'Tên sản phẩm đã tồn tại',
-                'price.required' => 'Mời bạn nhập giá sản phẩm',
-                'sale_price.required' => 'Mời bạn nhập giá khuyễn mãi sản',
-                'details.required' => 'Mời bạn nhập chi tiết sản phẩm',
-                'feature_image.required' => 'Mời bạn chọn ảnh sản phẩm',
-                'cate_id.required' => 'Mời bạn nhập chọn danh mục sản phẩm',
-            ],
-        );
         $this->productRepository->createProduct($request);
         return redirect()->route('listProducts')
             ->with('success', 'Thêm sản phẩm thành công');
@@ -71,22 +52,9 @@ class ProductController extends Controller
        return view('Admin.Products.EditProduct',compact('cates','products'));
     }
 
-    public function createEditProducts(Request $request,$id)
+    public function createEditProducts($id , Request $request)
     {
-        $products = Product::find($id);
-		$products->name = $request->input('name');
-		$products->price = $request->input('price');
-		$products->sale_price = $request->input('sale_price');
-		$products->details = $request->input('details');
-		$products->status = $request->input('status');
-		$products->quantity = $request->input('quantity');
-		$products->cate_id = $request->input('cate_id');
-		if ($request->hasFile('feature_image')) {
-			$newFileName = uniqid() . '-' . $request->feature_image->extension();
-			$path = $request->feature_image->storeAs('uploads/products', $newFileName);
-			$products->feature_image = $path;
-		}
-		$products->save();
+        $this->productRepository->createEditProduct($id, $request);
        return redirect()->route('listProducts')
             ->with('success', 'Sửa sản phẩm thành công');
     }

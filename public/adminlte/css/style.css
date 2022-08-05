@@ -15,5 +15,14 @@ img#priview {
     height: 204px;
     width: 400pxx;
 }
+
+button.btn.btn-sm.btn-primary {
+    margin: 0 10px;
+}
+
+img.img-boder {
+    border-radius: 16px;
+    height: 30px;
+}
 .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
 .toggle.ios .toggle-handle { border-radius: 20px; }

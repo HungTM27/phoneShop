@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Banner\BannerRepository;
+use App\Repositories\Admin\Banner\BannerRepository;
 
 class SliderBannerController extends Controller
 {
@@ -36,7 +36,7 @@ class SliderBannerController extends Controller
 
     public function createBanner(Request $request)
     {
-        $this->validate($request,[
+        $request->validate(
             [
                 'title' => 'required|unique:slides',
                 'slides_image' => 'required'
@@ -46,11 +46,8 @@ class SliderBannerController extends Controller
                 'title.unique' => 'Tên đã tồn tại',
                 'slides_image.required' => 'Vui lòng chọn ảnh',
             ]
-        ]);
-       $createBanner = $this->bannerRepository->createBanner($request);
-        if (!$createBanner == '') {
-            return "Thêm banner thất bại";
-        }
+        );
+       $this->bannerRepository->createBanner($request);
         return redirect()->route('listBanner')
         ->with('success','Thêm banner thành công');
     }
@@ -63,18 +60,7 @@ class SliderBannerController extends Controller
 
     public function editCreateBanner(Request $request, $id)
     {
-        $banner = Banner::find($id);
-        $banner->title = $request->title;
-        $banner->status = $request->status;
-        if ($request->hasFile('slides_image')) {
-            $newFileName = uniqid() . '-' . $request->slides_image->extension();
-            $path = $request->slides_image->storeAs('uploads/banner', $newFileName);
-            $banner->slides_image = $path;
-        }
-        $banner->save();
-        if(is_null($banner == '')){
-            return "Cập nhật không thành công";
-        }
+        $this->bannerRepository->createEditBanner($id, $request);
         return redirect()->route('listBanner')
         ->with('success','Sửa banner thành công');
     }

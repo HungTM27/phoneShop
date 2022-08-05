@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use App\Repositories\Dashboard\DashboardRepository;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use App\Repositories\Admin\Dashboard\DashboardRepository;
 
 class DashboardController extends Controller
 {
